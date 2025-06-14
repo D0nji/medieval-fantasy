@@ -68,7 +68,7 @@
     thresholds:
       0: Alive
       10: Dead
-  - type: NightVision # DS14 
+  - type: NightVision # DS14
 
 - type: entity
   name: bee
@@ -1390,6 +1390,7 @@
     - VimPilot
     - DoorBumpOpener
     - AnomalyHost
+    - MonkeyKingTarget
   - type: Reactive
     groups:
       Flammable: [ Touch ]

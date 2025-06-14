@@ -38,7 +38,6 @@ public sealed class SithForceAbilitySystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
-    
     public const float MinGravPulseRange = 0.00001f;
     public const float MinRange = 0.01f;
     public const float MaxStrenghtPush = 15f;
