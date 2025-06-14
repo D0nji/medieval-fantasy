@@ -65,7 +65,6 @@
     damage:
       types:
         Blunt: 20
-    types:
         Structural: 10
     animation: WeaponArcFist
   - type: NPCRetaliation
