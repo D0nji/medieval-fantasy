@@ -2,6 +2,9 @@ using Content.Shared.Chat;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.DeadSpace.CCCCVars;
+using Content.Shared.DeadSpace.Languages.Components;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Robust.Client.Audio;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Audio;
@@ -9,6 +12,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Utility;
+using Robust.Shared.Player;
 
 namespace Content.Client.Corvax.TTS;
 
@@ -21,7 +25,7 @@ public sealed class TTSSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IResourceManager _res = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
-
+    [Dependency] private readonly IEntityManager _entManager = default!;
     private ISawmill _sawmill = default!;
     private readonly MemoryContentRoot _contentRoot = new();
     private static readonly ResPath Prefix = ResPath.Root / "TTS";
@@ -91,26 +95,78 @@ public sealed class TTSSystem : EntitySystem
         var filePath = new ResPath($"{_fileIdx++}.ogg");
         _contentRoot.AddOrUpdateFile(filePath, ev.Data);
 
+
+        var lexiconFilePath = new ResPath($"{_fileIdx + 2}.ogg");
+
+        if (ev.LexiconData != null)
+            _contentRoot.AddOrUpdateFile(lexiconFilePath, ev.LexiconData);
+        else
+            _contentRoot.AddOrUpdateFile(lexiconFilePath, ev.Data);
+
         var audioResource = new AudioResource();
         audioResource.Load(IoCManager.Instance!, Prefix / filePath);
 
         var audioParams = AudioParams.Default
-            .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio))
-            .WithMaxDistance(AdjustDistance(ev.IsWhisper));
+        .WithVolume(AdjustVolume(ev.IsWhisper, ev.IsRadio))
+        .WithMaxDistance(AdjustDistance(ev.IsWhisper));
 
         var soundSpecifier = new ResolvedPathSpecifier(Prefix / filePath);
+        var lexiconSoundSpecifier = new ResolvedPathSpecifier(Prefix / lexiconFilePath);
 
-        if (ev.SourceUid != null)
+        var query = EntityQueryEnumerator<MindContainerComponent>();
+        var sourceUid = GetEntity(ev.SourceUid);
+
+        Filter entityFilterWithLanguage = Filter.Empty();
+        Filter entityFilterWithoutLanguage = Filter.Empty();
+
+        if (sourceUid != null && ev.LanguageId != null)
         {
-            var sourceUid = GetEntity(ev.SourceUid.Value);
-            _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams);
+            while (query.MoveNext(out var entity, out var mindContainerComp))
+            {
+                if (TryComp<MindComponent>(mindContainerComp.Mind, out var currentMind) && currentMind.Session != null)
+                {
+                    if (TryComp<LanguageComponent>(entity, out var lanquage))
+                    {
+                        if (lanquage.LanguagesId.Contains(ev.LanguageId))
+                            entityFilterWithLanguage.AddPlayer(currentMind.Session);
+                        else
+                            entityFilterWithoutLanguage.AddPlayer(currentMind.Session);
+                    }
+                    else
+                    {
+                        entityFilterWithLanguage.AddPlayer(currentMind.Session);
+                    }
+                }
+            }
+        }
+
+        if (sourceUid != null)
+        {
+            if (ev.LanguageId == null)
+            {
+                _audio.PlayEntity(audioResource.AudioStream, sourceUid.Value, soundSpecifier, audioParams);
+            }
+            else
+            {
+                _audio.PlayEntity(soundSpecifier, entityFilterWithLanguage, sourceUid.Value, false, audioParams);
+                _audio.PlayEntity(lexiconSoundSpecifier, entityFilterWithoutLanguage, sourceUid.Value, false, audioParams);
+            }
         }
         else
         {
-            _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+            if (ev.LanguageId == null)
+            {
+                _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+            }
+            else
+            {
+                _audio.PlayGlobal(soundSpecifier, entityFilterWithLanguage, false, audioParams);
+                _audio.PlayGlobal(lexiconSoundSpecifier, entityFilterWithoutLanguage, false, audioParams);
+            }
         }
 
         _contentRoot.RemoveFile(filePath);
+        _contentRoot.RemoveFile(lexiconFilePath);
     }
 
     private float AdjustVolume(bool isWhisper, bool isRadio)

@@ -38,6 +38,8 @@ using Robust.Shared.Utility;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.Dataset;
 using Content.DeadSpace.Interfaces.Server;
+using Content.Shared.DeadSpace.Languages.Components;
+using Content.Server.DeadSpace.Languages;
 
 namespace Content.Server.Chat.Systems;
 
@@ -64,6 +66,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; //DS
     private IServerChatFilter? _chatFilter; // DS14-chat-filter
 
     public const int VoiceRange = 10; // how far voice goes in world units
@@ -508,9 +511,26 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("fontSize", speech.FontSize),
             ("message", FormattedMessage.EscapeText(message)));
 
-        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        TryComp<LanguageComponent>(source, out var language);
 
-        var ev = new EntitySpokeEvent(source, message, originalMessage, null, null);
+        string lexiconMessage = message;
+        string lexiconWrappedMessage = wrappedMessage;
+
+        // DS
+        if (language != null)
+        {
+            lexiconMessage = _language.ReplaceWordsWithLexicon(message, language.SelectedLanguage);
+
+            lexiconWrappedMessage = wrappedMessage.Replace(FormattedMessage.EscapeText(message), FormattedMessage.EscapeText(lexiconMessage));
+        }
+        // DS
+
+        var selectedLanguage = language != null ? language.SelectedLanguage : string.Empty; // DS
+
+        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range, null, lexiconMessage, lexiconWrappedMessage, selectedLanguage);
+
+
+        var ev = new EntitySpokeEvent(source, message, lexiconMessage, selectedLanguage, originalMessage, null, null); // DS
         RaiseLocalEvent(source, ev, true);
 
         // To avoid logging any messages sent by entities that are not players, like vendors, cloning, etc.
@@ -580,6 +600,19 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
+        // DS
+        string lexiconMessage = message;
+
+        if (TryComp<LanguageComponent>(source, out var language))
+            lexiconMessage = _language.ReplaceWordsWithLexicon(message, language.SelectedLanguage);
+
+        var newObfuscatedMessage = ObfuscateMessageReadability(lexiconMessage, 0.2f);
+
+        var newWrappedMessage = wrappedMessage.Replace(FormattedMessage.EscapeText(message), FormattedMessage.EscapeText(lexiconMessage));
+        var newWrappedobfuscatedMessage = wrappedobfuscatedMessage.Replace(FormattedMessage.EscapeText(obfuscatedMessage), FormattedMessage.EscapeText(newObfuscatedMessage));
+        var newWrappedUnknownMessage = wrappedUnknownMessage.Replace(FormattedMessage.EscapeText(obfuscatedMessage), FormattedMessage.EscapeText(newObfuscatedMessage));
+
+        //DS
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
@@ -587,10 +620,25 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (session.AttachedEntity is not { Valid: true } playerEntity)
                 continue;
+
             listener = session.AttachedEntity.Value;
 
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
+
+            // DS
+            if (language != null && !_language.KnowsLanguage(listener, language.SelectedLanguage))
+            {
+                if (data.Range <= WhisperClearRange)
+                    _chatManager.ChatMessageToOne(ChatChannel.Whisper, lexiconMessage, newWrappedMessage, source, false, session.Channel);
+                else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
+                    _chatManager.ChatMessageToOne(ChatChannel.Whisper, newObfuscatedMessage, newWrappedobfuscatedMessage, source, false, session.Channel);
+                else
+                    _chatManager.ChatMessageToOne(ChatChannel.Whisper, newObfuscatedMessage, newWrappedUnknownMessage, source, false, session.Channel);
+
+                continue;
+            }
+            // DS
 
             if (data.Range <= WhisperClearRange)
                 _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
@@ -604,7 +652,9 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
 
-        var ev = new EntitySpokeEvent(source, message, originalMessage, channel, obfuscatedMessage);
+        var selectedLanguage = language != null ? language.SelectedLanguage : string.Empty; // DS
+        var ev = new EntitySpokeEvent(source, message, lexiconMessage, selectedLanguage, originalMessage, channel, obfuscatedMessage); // DS
+
         RaiseLocalEvent(source, ev, true);
         if (!hideLog)
             if (originalMessage == message)
@@ -759,15 +809,39 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
     /// </summary>
-    private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
+    private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null, string? lexiconMessage = null, string? lexiconWrappedMessage = null, string? selectedLanguage = null)
     {
+        var totalWrappedMessage = wrappedMessage;
+        var totalMessage = message;
+
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
+            // DS
+            EntityUid listener;
+
+            if (session.AttachedEntity is not { Valid: true } playerEntity)
+                continue;
+
+            listener = session.AttachedEntity.Value;
+
+            if (lexiconMessage != null && lexiconWrappedMessage != null && selectedLanguage != null && !_language.KnowsLanguage(listener, selectedLanguage))
+            {
+                totalWrappedMessage = lexiconWrappedMessage;
+                totalMessage = lexiconMessage;
+            }
+            else
+            {
+                totalWrappedMessage = wrappedMessage;
+                totalMessage = message;
+            }
+
+            // DS
+
             var entRange = MessageRangeCheck(session, data, range);
             if (entRange == MessageRangeCheckResult.Disallowed)
                 continue;
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
-            _chatManager.ChatMessageToOne(channel, message, wrappedMessage, source, entHideChat, session.Channel, author: author);
+            _chatManager.ChatMessageToOne(channel, totalMessage, totalWrappedMessage, source, entHideChat, session.Channel, author: author);
         }
 
         _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
@@ -1005,6 +1079,8 @@ public sealed class EntitySpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly string LexiconMessage; // DS
+    public readonly string LanguageId; // DS
     public readonly string OriginalMessage;
     public readonly string? ObfuscatedMessage; // not null if this was a whisper
 
@@ -1014,10 +1090,12 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    public EntitySpokeEvent(EntityUid source, string message, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage)
+    public EntitySpokeEvent(EntityUid source, string message, string lexiconMessage, string languageId, string originalMessage, RadioChannelPrototype? channel, string? obfuscatedMessage)
     {
         Source = source;
         Message = message;
+        LexiconMessage = lexiconMessage; // DS
+        LanguageId = languageId; // DS
         OriginalMessage = originalMessage; // Corvax-TTS: Spec symbol sanitize
         Channel = channel;
         ObfuscatedMessage = obfuscatedMessage;
@@ -1031,11 +1109,15 @@ public sealed class EntitySpokeToEntityEvent : EntityEventArgs
 {
     public readonly EntityUid Target;
     public readonly string Message;
+    public readonly string LexiconMessage;
+    public readonly string LanguageId;
 
-    public EntitySpokeToEntityEvent(EntityUid target, string message)
+    public EntitySpokeToEntityEvent(EntityUid target, string message, string lexiconMessage, string languageId)
     {
         Target = target;
         Message = message;
+        LanguageId = languageId;
+        LexiconMessage = lexiconMessage;
     }
 }
 
@@ -1046,16 +1128,20 @@ public sealed class RadioSpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
+    public readonly string LexiconMessage;
+    public readonly string LanguageId;
 
     /// <summary>
     ///     Of course, we can just use <see cref="EntitySpokeEvent"/>, but it's easier to send a message using RadioSystem
     /// </summary>
     public readonly EntityUid[] Receivers;
 
-    public RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers)
+    public RadioSpokeEvent(EntityUid source, string message, string lexiconMessage, string languageId, EntityUid[] receivers)
     {
         Source = source;
         Message = message;
+        LexiconMessage = lexiconMessage;
+        LanguageId = languageId;
         Receivers = receivers;
     }
 }

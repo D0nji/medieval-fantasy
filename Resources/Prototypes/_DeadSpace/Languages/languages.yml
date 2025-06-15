@@ -1,0 +1,27 @@
+- type: language
+  id: language1
+  lexicon:
+  - яблоко
+
+- type: language
+  id: language2
+  lexicon:
+  - апельсин
+
+- type: entity
+  parent: MobHuman
+  id: language1
+  components:
+  - type: Language
+    selectedLanguage: language1
+    languagesId:
+    - language1
+
+- type: entity
+  parent: MobHuman
+  id: language2
+  components:
+  - type: Language
+    selectedLanguage: language2
+    languagesId:
+    - language2

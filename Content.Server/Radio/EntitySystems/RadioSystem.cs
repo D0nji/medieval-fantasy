@@ -18,6 +18,8 @@ using Content.Shared.Inventory;
 using Content.Shared.PDA;
 using Content.Shared.Access.Components;
 using System.Text.RegularExpressions;
+using Content.Shared.DeadSpace.Languages.Components;
+using Content.Server.DeadSpace.Languages;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -33,6 +35,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; //DS
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -74,6 +77,11 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
+        var msg = args.ChatMsg;
+
+        if (!string.IsNullOrEmpty(args.LanguageId) && !_language.KnowsLanguage(uid, args.LanguageId))
+            msg = args.lexiconChatMsg;
+
         if (TryComp(uid, out ActorComponent? actor))
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
     }
@@ -158,7 +166,44 @@ public sealed class RadioSystem : EntitySystem
             NetEntity.Invalid,
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
-        var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg, []); // DS14
+
+        // DS
+        var lexiconMessage = message;
+        var chatMsgLexicon = chatMsg;
+
+        if (TryComp<LanguageComponent>(messageSource, out var language))
+        {
+            lexiconMessage = _language.ReplaceWordsWithLexicon(message, language.SelectedLanguage);
+
+            var lexiconContent = escapeMarkup
+            ? FormattedMessage.EscapeText(lexiconMessage)
+            : lexiconMessage;
+
+            lexiconContent = Highlight(lexiconContent);
+
+            var wrappedLexiconMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
+            ("channel-color", channel.Color),
+            ("fontType", speech.FontId),
+            ("fontSize", speech.FontSize),
+            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("channel", $"\\[{channel.LocalizedName}\\]"),
+            ("name", name),
+            ("message", lexiconContent),
+            ("headset-color", headsetColor),
+            ("job", job));
+
+            var chatLexicon = new ChatMessage(
+                ChatChannel.Radio,
+                lexiconMessage,
+                wrappedLexiconMessage,
+                NetEntity.Invalid,
+                null);
+
+            chatMsgLexicon = new MsgChatMessage { Message = chatLexicon };
+        }
+
+        var ev = new RadioReceiveEvent(message, string.Empty, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
+        // DS
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -194,11 +239,20 @@ public sealed class RadioSystem : EntitySystem
             if (attemptEv.Cancelled)
                 continue;
 
+            if (language != null)
+            {
+                var lexiconRadioReceiveEv = new RadioReceiveEvent(message, language.SelectedLanguage, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
+                RaiseLocalEvent(receiver, ref lexiconRadioReceiveEv);
+                continue;
+            }
+
             // send the message
             RaiseLocalEvent(receiver, ref ev);
         }
 
-        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, ev.Receivers.ToArray())); // DS14
+        var selectedLanguage = language != null ? language.SelectedLanguage : string.Empty;
+
+        RaiseLocalEvent(new RadioSpokeEvent(messageSource, message, lexiconMessage, selectedLanguage, ev.Receivers.ToArray())); // DS14
 
         if (name != Name(messageSource))
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");

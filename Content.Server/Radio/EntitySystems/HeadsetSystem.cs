@@ -10,6 +10,8 @@ using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared.DeadSpace.Languages.Components;
+using Content.Server.DeadSpace.Languages;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -18,6 +20,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly LanguageSystem _language = default!; //DS
 
     public override void Initialize()
     {
@@ -103,13 +106,18 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
+        var msg = args.ChatMsg;
+
+        if (!string.IsNullOrEmpty(args.LanguageId) && !_language.KnowsLanguage(Transform(uid).ParentUid, args.LanguageId))
+            msg = args.lexiconChatMsg;
+
         // TTS-start
         _audio.PlayPvs(component.RadioReceiveSoundPath, uid, AudioParams.Default.WithVolume(-10f));
 
         var actorUid = Transform(uid).ParentUid;
         if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor))
         {
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
             if (actorUid != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
             {
                 args.Receivers.Add(actorUid);
