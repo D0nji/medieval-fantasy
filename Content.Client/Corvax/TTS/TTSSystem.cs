@@ -89,6 +89,8 @@ public sealed class TTSSystem : EntitySystem
             return;
         }
 
+        Log.Debug($"[TTSSystem] TTS играет.");
+
         _sawmill.Verbose($"Play TTS audio {ev.Data.Length} bytes from {ev.SourceUid} entity");
 
         var filePath = new ResPath($"{_fileIdx++}.ogg");
@@ -127,13 +129,20 @@ public sealed class TTSSystem : EntitySystem
                     if (TryComp<LanguageComponent>(entity, out var lanquage))
                     {
                         if (lanquage.LanguagesId.Contains(ev.LanguageId))
+                        {
                             entityFilterWithLanguage.AddPlayer(currentMind.Session);
+                            Log.Debug($"[TTSSystem] {entity} добавлен в фильтр знающих язык.");
+                        }
                         else
+                        {
                             entityFilterWithoutLanguage.AddPlayer(currentMind.Session);
+                            Log.Debug($"[TTSSystem] {entity} добавлен в фильтр не знающих язык.");
+                        }
                     }
                     else
                     {
                         entityFilterWithLanguage.AddPlayer(currentMind.Session);
+                        Log.Debug($"[TTSSystem] {entity} добавлен в фильтр знающих язык.");
                     }
                 }
             }
@@ -144,11 +153,13 @@ public sealed class TTSSystem : EntitySystem
             if (ev.LanguageId == null)
             {
                 _audio.PlayEntity(audioResource.AudioStream, sourceUid.Value, soundSpecifier, audioParams);
+                Log.Debug($"[TTSSystem] null.");
             }
             else
             {
                 _audio.PlayEntity(soundSpecifier, entityFilterWithLanguage, sourceUid.Value, false, audioParams);
                 _audio.PlayEntity(lexiconSoundSpecifier, entityFilterWithoutLanguage, sourceUid.Value, false, audioParams);
+                Log.Debug($"[TTSSystem] {ev.LanguageId}.");
             }
         }
         else
@@ -156,11 +167,13 @@ public sealed class TTSSystem : EntitySystem
             if (ev.LanguageId == null)
             {
                 _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+                Log.Debug($"[TTSSystem] global null.");
             }
             else
             {
                 _audio.PlayGlobal(soundSpecifier, entityFilterWithLanguage, false, audioParams);
                 _audio.PlayGlobal(lexiconSoundSpecifier, entityFilterWithoutLanguage, false, audioParams);
+                Log.Debug($"[TTSSystem] global {ev.LanguageId}.");
             }
         }
 
