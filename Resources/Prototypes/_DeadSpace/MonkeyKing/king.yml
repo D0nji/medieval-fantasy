@@ -76,7 +76,7 @@
     necroPrototype: NecroBrute
   - type: NpcFactionMember
     factions:
-    - SimpleHostile
+    - AllHostile
   - type: JumpAbility
     jumpSound:
       collection: RevSounds
@@ -119,7 +119,7 @@
   parent: MarkerBase
   components:
   - type: GhostRole
-    name: ghost-role-information-rat-king-name
+    name: ghost-role-information-monkey-king-name
     description: ghost-role-information-monkey-king-description
     rules: ghost-role-information-rules-team-antagonist
     mindRoles:

@@ -169,7 +169,7 @@ public sealed partial class MonkeyKingSystem : EntitySystem
         }
 
         _faction.ClearFactions(target, dirty: false);
-        _faction.AddFaction(target, "SimpleHostile");
+        _faction.AddFaction(target, "AllHostile");
 
         if (component.GiveIntelligenceSound != null)
             _audio.PlayPvs(component.GiveIntelligenceSound, uid, AudioParams.Default.WithVolume(3));
