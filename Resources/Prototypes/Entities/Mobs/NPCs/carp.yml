@@ -79,8 +79,10 @@
       tags:
         - Carp
         - DoorBumpOpener
-    - type: ReplacementAccent
-      accent: genericAggressive
+    - type: Language
+      selectedLanguage: CarpDragonLanguage
+      languagesId:
+      - CarpDragonLanguage
     - type: Speech
       speechVerb: LargeMob
     - type: InteractionPopup

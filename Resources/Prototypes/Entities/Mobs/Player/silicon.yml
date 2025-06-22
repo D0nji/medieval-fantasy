@@ -479,6 +479,24 @@
     - state: ai_camera
       shader: unshaded
       map: ["base"]
+  - type: Language # DS14 
+    selectedLanguage: GeneralLanguage
+    languagesId:
+    - GeneralLanguage
+    - ArachnidLanguage
+    - SlimeLanguage
+    - DionaLanguage
+    - DwarfLanguage
+    - MothLanguage
+    - ReptilianLanguage
+    - VoxLanguage
+    - DemonLanguage
+    - CatLanguage
+    - MachineLanguage
+    - KoboltLanguage
+    - PlafLanguage
+    - VulpkaninLanguage
+    - XenomorphLanguage
 
 # The holographic representation of the AI that is projected from a holopad.
 - type: entity

@@ -37,6 +37,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
+using Content.Shared.DeadSpace.Languages.Components;
 
 namespace Content.Server.Zombies;
 
@@ -111,12 +112,21 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
 
+        // DS-Start
+        if (HasComp<LanguageComponent>(target))
+            RemComp<LanguageComponent>(target);
+
+        var langComp = new LanguageComponent();
+        langComp.LanguagesId.Add("ZombieLanguage");
+        langComp.SelectedLanguage = "ZombieLanguage";
+        AddComp(target, langComp);
+        // DS-End
+
         //funny voice
         var accentType = "zombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
             accentType = accent.Accent;
 
-        EnsureComp<ReplacementAccentComponent>(target).Accent = accentType;
 
         //This is needed for stupid entities that fuck up combat mode component
         //in an attempt to make an entity not attack. This is the easiest way to do it.

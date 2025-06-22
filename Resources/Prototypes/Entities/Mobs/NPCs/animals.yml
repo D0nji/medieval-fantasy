@@ -51,8 +51,10 @@
     flavorKind: station-event-random-sentience-flavor-organic
   - type: Bloodstream
     bloodMaxVolume: 50
-  - type: ReplacementAccent
-    accent: mouse
+  - type: Language
+    selectedLanguage: MouseLanguage
+    languagesId:
+    - MouseLanguage
   - type: MeleeWeapon
     soundHit:
         path: /Audio/Effects/bite.ogg
@@ -68,7 +70,7 @@
     thresholds:
       0: Alive
       10: Dead
-  - type: NightVision # DS14 
+  - type: NightVision # DS14
 
 - type: entity
   name: bee
@@ -247,8 +249,10 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: ReplacementAccent
-    accent: chicken
+  - type: Language
+    selectedLanguage: ChickenLanguage
+    languagesId:
+    - ChickenLanguage
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -547,8 +551,10 @@
       amount: 2
   - type: Extractable
     grindableSolutionName: food
-  - type: ReplacementAccent
-    accent: mothroach
+  - type: Language
+    selectedLanguage: MothLanguage
+    languagesId:
+    - MothLanguage
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Vocal
@@ -688,8 +694,10 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: ReplacementAccent
-    accent: duck
+  - type: Language
+    selectedLanguage: ChickenLanguage
+    languagesId:
+    - ChickenLanguage
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -900,8 +908,10 @@
     guides:
     - Chef
     - FoodRecipes
-  - type: ReplacementAccent
-    accent: cow
+  - type: Language
+    selectedLanguage: CowLanguage
+    languagesId:
+    - CowLanguage
   - type: TTS
     voice: Thrud
 
@@ -959,8 +969,10 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
-  - type: ReplacementAccent
-    accent: crab
+  - type: Language
+    selectedLanguage: CrabLanguage
+    languagesId:
+    - CrabLanguage
   - type: Bloodstream
     bloodMaxVolume: 50
     bloodReagent: CopperBlood
@@ -1216,8 +1228,10 @@
   - type: Inventory
     speciesId: kangaroo
     templateId: kangaroo
-  - type: ReplacementAccent
-    accent: kangaroo
+  - type: Language
+    selectedLanguage: KangarooLanguage
+    languagesId:
+    - KangarooLanguage
   - type: Butcherable
     spawned:
     - id: FoodMeat
@@ -1492,8 +1506,10 @@
   - type: NameIdentifier
     group: Kobold
   - type: LizardAccent
-  - type: ReplacementAccent
-    accent: kobold
+  - type: Language
+    selectedLanguage: KoboltLanguage
+    languagesId:
+    - KoboltLanguage
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
@@ -1773,8 +1789,10 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+  - type: Language
+    selectedLanguage: MouseLanguage
+    languagesId:
+    - MouseLanguage
   - type: Tag
     tags:
     - Trash
@@ -2400,8 +2418,10 @@
   - type: MeleeChemicalInjector
     transferAmount: 0.75
     solution: melee
-  - type: ReplacementAccent
-    accent: xeno
+  - type: Language
+    selectedLanguage: XenomorphLanguage
+    languagesId:
+    - XenomorphLanguage
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-tarantula
@@ -2568,11 +2588,6 @@
   id: MobGiantSpiderWizard
   description: This spider looks a little magical
   suffix: Wizard
-  components:
-  - type: Accentless
-    removes:
-    - type: ReplacementAccent
-      accent: xeno  #let this wizard speak
 
 - type: entity
   name: possum
@@ -2823,8 +2838,10 @@
     spawned:
     - id: FoodMeat
       amount: 2
-  - type: ReplacementAccent
-    accent: dog
+  - type: Language
+    selectedLanguage: DogLanguage
+    languagesId:
+    - DogLanguage
   - type: InteractionPopup
     interactSuccessString: petting-success-dog
     interactFailureString: petting-failure-generic
@@ -2973,8 +2990,10 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: ReplacementAccent
-    accent: cat
+  - type: Language
+    selectedLanguage: CatLanguage
+    languagesId:
+    - CatLanguage
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-cat
@@ -3366,8 +3385,10 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: ReplacementAccent
-    accent: mouse
+  - type: Language
+    selectedLanguage: MouseLanguage
+    languagesId:
+    - MouseLanguage
   - type: Tag
     tags:
     - VimPilot
@@ -3475,8 +3496,10 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: ReplacementAccent
-    accent: pig
+  - type: Language
+    selectedLanguage: PigLanguage
+    languagesId:
+    - PigLanguage
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
   - type: NpcFactionMember
@@ -3572,8 +3595,10 @@
   id: MobDionaNymphAccent # No talky. For non-brain & wild nymphs
   suffix: Accent
   components:
-  - type: ReplacementAccent
-    accent: nymph
+  - type: Language
+    selectedLanguage: DionaLanguage
+    languagesId:
+    - DionaLanguage
 
 - type: entity
   name: reindeer buck

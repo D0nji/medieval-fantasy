@@ -23,7 +23,7 @@ public sealed class LanguagePanelSystem : EntitySystem
     [Dependency] private readonly SpriteSystem _spriteSystem = default!;
 
     private RadialContainer? _openedMenu;
-    private const string DefaultIcon = "/Textures/Effects/speech.rsi/default3.png";
+    private const string DefaultIcon = "/Textures/_DeadSpace/LanguageIcons/default.png";
 
     public override void Initialize()
     {

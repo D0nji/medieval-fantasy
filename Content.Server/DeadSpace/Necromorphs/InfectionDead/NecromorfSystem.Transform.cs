@@ -50,6 +50,7 @@ using Content.Shared.DeadSpace.Necromorphs.Necroobelisk;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Rotation;
+using Content.Shared.DeadSpace.Languages.Components;
 
 namespace Content.Server.DeadSpace.Necromorphs.InfectionDead;
 
@@ -127,9 +128,13 @@ public sealed partial class NecromorfSystem
         if (HasComp<SlowOnDamageComponent>(target) && !necromorf.IsSlowOnDamage)
             RemComp<SlowOnDamageComponent>(target);
 
-        var accentType = "genericAggressive";
+        if (HasComp<LanguageComponent>(target))
+            RemComp<LanguageComponent>(target);
 
-        EnsureComp<ReplacementAccentComponent>(target).Accent = accentType;
+        var langComp = new LanguageComponent();
+        langComp.LanguagesId.Add("NecromorfLanguage");
+        langComp.SelectedLanguage = "NecromorfLanguage";
+        AddComp(target, langComp);
 
         var combat = EnsureComp<CombatModeComponent>(target);
         RemComp<PacifiedComponent>(target);

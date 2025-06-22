@@ -1,0 +1,33 @@
+- type: language
+  id: language1
+  name: один
+  lexicon:
+  - blue
+
+- type: language
+  id: language2
+  name: два
+  lexicon:
+  - red
+
+- type: entity
+  parent: MobHuman
+  id: language1
+  components:
+  - type: TTS
+    voice: En0
+  - type: Language
+    selectedLanguage: language1
+    languagesId:
+    - language1
+
+- type: entity
+  parent: MobHuman
+  id: language2
+  components:
+  - type: TTS
+    voice: En0
+  - type: Language
+    selectedLanguage: language2
+    languagesId:
+    - language2

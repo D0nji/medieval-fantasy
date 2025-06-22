@@ -123,6 +123,11 @@
   - type: FootPrints # Backmen-footsteps
     leftBarePrint: "footprint-left-bare-slime"
     rightBarePrint: "footprint-right-bare-slime"
+  - type: Language # DS14
+    selectedLanguage: GeneralLanguage
+    languagesId:
+    - GeneralLanguage
+    - SlimeLanguage
 
 - type: entity
   parent: MobHumanDummy

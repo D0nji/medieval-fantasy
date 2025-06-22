@@ -114,6 +114,11 @@
   - type: FootPrints # Backmen-footsteps
     leftBarePrint: "footprint-left-bare-diona"
     rightBarePrint: "footprint-right-bare-diona"
+  - type: Language # DS14
+    selectedLanguage: GeneralLanguage
+    languagesId:
+    - GeneralLanguage
+    - DionaLanguage
 
 - type: entity
   parent: BaseSpeciesDummy

@@ -167,7 +167,7 @@ public sealed class RadioSystem : EntitySystem
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
 
-        // DS
+        // DS-Start
         var lexiconMessage = message;
         var chatMsgLexicon = chatMsg;
 
@@ -202,8 +202,13 @@ public sealed class RadioSystem : EntitySystem
             chatMsgLexicon = new MsgChatMessage { Message = chatLexicon };
         }
 
-        var ev = new RadioReceiveEvent(message, string.Empty, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
-        // DS
+        var languageId = "GeneralLanguage";
+
+        if (language != null)
+            languageId = language.SelectedLanguage;
+
+        var ev = new RadioReceiveEvent(message, languageId, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
+        // DS-End
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -238,13 +243,6 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref attemptEv);
             if (attemptEv.Cancelled)
                 continue;
-
-            if (language != null)
-            {
-                var lexiconRadioReceiveEv = new RadioReceiveEvent(message, language.SelectedLanguage, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
-                RaiseLocalEvent(receiver, ref lexiconRadioReceiveEv);
-                continue;
-            }
 
             // send the message
             RaiseLocalEvent(receiver, ref ev);

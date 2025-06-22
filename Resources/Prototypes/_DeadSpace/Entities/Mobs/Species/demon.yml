@@ -51,6 +51,11 @@
   - type: Speech
     speechSounds: Lizard
   - type: FootPrints
+  - type: Language
+    selectedLanguage: GeneralLanguage
+    languagesId:
+    - DemonLanguage
+    - GeneralLanguage
 
 - type: entity
   parent: BaseSpeciesDummy

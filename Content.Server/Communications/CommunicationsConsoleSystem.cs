@@ -25,6 +25,7 @@ using Content.Shared.Containers.ItemSlots;
 using System.Linq;
 using Robust.Shared.Containers;
 using Content.Server.Chat.Managers;
+using Content.Shared.DeadSpace.Languages.Components;
 
 namespace Content.Server.Communications
 {
@@ -379,16 +380,24 @@ namespace Content.Server.Communications
             Loc.TryGetString(comp.Title, out var title);
             title ??= comp.Title;
 
+            // DS-Start
+            var languageId = "GeneralLanguage";
+
+            if (TryComp<LanguageComponent>(message.Actor, out var languageComponent))
+                languageId = languageComponent.SelectedLanguage;
+
+            // DS-End
+
             msg += "\n" + Loc.GetString("comms-console-announcement-sent-by") + " " + author;
             if (comp.Global)
             {
-                _chatSystem.DispatchGlobalAnnouncement(msg, title, announcementSound: comp.AnnouncementSound, colorOverride: comp.Color, originalMessage: originalMessage, author: message.Actor);
+                _chatSystem.DispatchGlobalAnnouncement(msg, title, announcementSound: comp.AnnouncementSound, colorOverride: comp.Color, originalMessage: originalMessage, author: message.Actor, languageId: languageId); // DS14 TODO
 
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following global announcement: {msg}");
                 return;
             }
 
-            _chatSystem.DispatchGlobalAnnouncement(msg, title, announcementSound: comp.AnnouncementSound, colorOverride: comp.Color, originalMessage: originalMessage, author: message.Actor); // DS14 TODO
+            _chatSystem.DispatchGlobalAnnouncement(msg, title, announcementSound: comp.AnnouncementSound, colorOverride: comp.Color, originalMessage: originalMessage, author: message.Actor, languageId: languageId); // DS14 TODO
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following global announcement: {msg}"); // DS14 TODO (has sent the following station announcement)
 

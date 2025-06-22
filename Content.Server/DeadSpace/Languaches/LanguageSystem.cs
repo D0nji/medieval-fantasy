@@ -7,6 +7,7 @@ using Robust.Shared.Prototypes;
 using Content.Shared.Actions;
 using Robust.Shared.Player;
 using Content.Shared.DeadSpace.Languages;
+using Robust.Server.Player;
 
 namespace Content.Server.DeadSpace.Languages;
 
@@ -15,6 +16,7 @@ public sealed class LanguageSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -97,6 +99,25 @@ public sealed class LanguageSystem : EntitySystem
             return false;
 
         return languages.Contains(senderLanguageId);
+    }
+
+    public ICommonSession[] GetUnderstanding(string languageId)
+    {
+        var understanding = new List<ICommonSession>();
+
+        foreach (var session in _playerManager.Sessions)
+        {
+            if (session.AttachedEntity == null)
+                continue;
+
+            if (TryComp<LanguageComponent>(session.AttachedEntity, out var lanquage) && KnowsLanguage(session.AttachedEntity.Value, languageId))
+            {
+                Console.WriteLine(session.AttachedEntity + " знает " + languageId);
+                understanding.Add(session);
+            }
+        }
+
+        return understanding.ToArray();
     }
 
 }

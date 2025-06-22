@@ -30,8 +30,10 @@
         0: Alive
         40: Critical
         60: Dead
-    - type: ReplacementAccent
-      accent: xeno
+    - type: Language
+      selectedLanguage: XenomorphLanguage
+      languagesId:
+      - XenomorphLanguage
     - type: TypingIndicator
       proto: lizard
     - type: Speech

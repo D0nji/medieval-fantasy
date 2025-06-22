@@ -258,6 +258,11 @@
     voice: TrainingRobot
   - type: EmotePanel # DS14-Emote-panel
   - type: ComputerEmotes # DS14: For emote panel
+  - type: Language # DS14 
+    selectedLanguage: GeneralLanguage
+    languagesId:
+    - GeneralLanguage
+    - MachineLanguage
 
 - type: entity
   abstract: true

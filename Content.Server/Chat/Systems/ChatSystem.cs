@@ -347,19 +347,31 @@ public sealed partial class ChatSystem : SharedChatSystem
         string originalMessage = "",
         EntityUid? author = null,
         string? voice = null,
-        bool usePresetTTS = false
+        bool usePresetTTS = false,
+        string languageId = "GeneralLanguage"
         )
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
         var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
 
-        // DS14-chat-filter-start
+        // DS14-start
         if (_chatFilter != null && _chatFilter.NotAllowedMessage(wrappedMessage))
             return;
-        // DS14-chat-filter-end
 
-        _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
+        string lexiconMessage = _language.ReplaceWordsWithLexicon(message, languageId);
+        var understanding = _language.GetUnderstanding(languageId);
+
+        var lexiconWrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(lexiconMessage)));
+
+        foreach (var session in _playerManager.Sessions)
+        {
+            if (!understanding.Contains(session))
+                _chatManager.ChatMessageToOne(ChatChannel.Radio, lexiconMessage, lexiconWrappedMessage, default, false, session.Channel, colorOverride, true);
+            else
+                _chatManager.ChatMessageToOne(ChatChannel.Radio, message, wrappedMessage, default, false, session.Channel, colorOverride, true);
+        }
+        // DS14-end
 
         // Fucked up logic ahead... FIX THIS PLEASE.
 
@@ -374,18 +386,18 @@ public sealed partial class ChatSystem : SharedChatSystem
 
             if (author != null && TryComp<TTSComponent>(author.Value, out var tts) && tts.VoicePrototypeId != null) // For comms console announcements
             {
-                var ev = new AnnounceSpokeEvent(tts.VoicePrototypeId, originalMessage, author.Value);
+                var ev = new AnnounceSpokeEvent(tts.VoicePrototypeId, originalMessage, lexiconMessage, languageId, author.Value);
                 RaiseLocalEvent(ev);
             }
             else if (usePresetTTS && sender == Loc.GetString("chat-manager-sender-announcement")) // For admin announcements from Centcomm with preset voices
             {
                 voice = _centcommTTS;
-                var ev = new AnnounceSpokeEvent(voice, originalMessage, null);
+                var ev = new AnnounceSpokeEvent(voice, originalMessage, lexiconMessage, languageId, null);
                 RaiseLocalEvent(ev);
             }
             else if (voice != null) // For admin announcements
             {
-                var ev = new AnnounceSpokeEvent(voice, originalMessage, null);
+                var ev = new AnnounceSpokeEvent(voice, originalMessage, lexiconMessage, languageId, null);
                 RaiseLocalEvent(ev);
             }
         }
@@ -1153,12 +1165,16 @@ public sealed class AnnounceSpokeEvent : EntityEventArgs
 {
     public readonly string Voice;
     public readonly string Message;
+    public readonly string LexiconMessage;
+    public readonly string LanguageId;
     public readonly EntityUid? Source;
 
-    public AnnounceSpokeEvent(string voice, string message, EntityUid? source)
+    public AnnounceSpokeEvent(string voice, string message, string lexiconMessage, string languageId, EntityUid? source)
     {
         Voice = voice;
         Message = message;
+        LexiconMessage = lexiconMessage;
+        LanguageId = languageId;
         Source = source;
     }
 }
