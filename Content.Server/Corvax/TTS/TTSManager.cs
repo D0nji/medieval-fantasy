@@ -76,7 +76,7 @@ public sealed class TTSManager
 
         var body = new GenerateVoiceRequest
         {
-            ApiToken = _apiToken,
+            Session = null,
             Text = text,
             Speaker = speaker,
         };
@@ -151,32 +151,14 @@ public sealed class TTSManager
         {
         }
 
-        [JsonPropertyName("api_token")]
-        public string ApiToken { get; set; } = "";
-
         [JsonPropertyName("text")]
         public string Text { get; set; } = "";
 
         [JsonPropertyName("speaker")]
         public string Speaker { get; set; } = "";
 
-        [JsonPropertyName("ssml")]
-        public bool SSML { get; private set; } = true;
-
-        [JsonPropertyName("word_ts")]
-        public bool WordTS { get; private set; } = false;
-
-        [JsonPropertyName("put_accent")]
-        public bool PutAccent { get; private set; } = true;
-
-        [JsonPropertyName("put_yo")]
-        public bool PutYo { get; private set; } = false;
-
-        [JsonPropertyName("sample_rate")]
-        public int SampleRate { get; private set; } = 24000;
-
-        [JsonPropertyName("format")]
-        public string Format { get; private set; } = "ogg";
+        [JsonPropertyName("session")]
+        public string? Session { get; set; } = null;
     }
 
     private struct GenerateVoiceResponse
