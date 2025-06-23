@@ -56,14 +56,14 @@
   # - type: Speech
   #   speechSounds: Tajaran
   - type: CatVocal # For cat emotes
-  - type: FootPrints
-    leftBarePrint: "footprint-left-bare-lizard"
-    rightBarePrint: "footprint-right-bare-lizard"
   - type: Language
     selectedLanguage: GeneralLanguage
     languagesId:
     - CatLanguage
     - GeneralLanguage
+  # - type: FootPrints
+    # leftBarePrint: "footprint-left-bare-lizard"
+    # rightBarePrint: "footprint-right-bare-lizard"
 
 
 - type: entity
