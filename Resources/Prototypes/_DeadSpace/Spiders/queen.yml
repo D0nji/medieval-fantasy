@@ -187,6 +187,7 @@
     paralyzeTime: 3 # Время стана
     rangeStun: 5 # Радиус способности
     ignorAlien: true # Не трогать союзников
+    stunBorg: false
     stunRadiusSound:
       path: /Audio/Animals/space_dragon_roar.ogg #Звуки способности
   - type: Puller
