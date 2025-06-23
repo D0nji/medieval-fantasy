@@ -23,23 +23,23 @@ public sealed partial class StunRadiusComponent : Component
     [DataField("actionStunRadius", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string ActionStunRadius = "ActionStunRadius";
 
-    [DataField("actionStunRadiusEntity")]
+    [DataField]
     public EntityUid? ActionStunRadiusEntity;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("paralyzeTime"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWrite)]
     public float ParalyzeTime = 3f;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("rangeStun"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWrite)]
     public float RangeStun = 5f;
 
-    [DataField("stunRadiusSound")]
+    [DataField]
     public SoundSpecifier? StunRadiusSound = default;
 
-    [DataField("ignorAlien")]
+    [DataField]
     public bool IgnorAlien = true;
 
     public bool IsRunning = false;
@@ -60,4 +60,8 @@ public sealed partial class StunRadiusComponent : Component
     [DataField]
     public string StunState = string.Empty;
     #endregion
+
+    [DataField]
+    public bool StunBorg = false;
+
 }

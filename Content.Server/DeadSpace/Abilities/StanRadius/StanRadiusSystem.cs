@@ -21,6 +21,7 @@ using Content.Server.Singularity.Components;
 using Robust.Shared.Spawners;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Timing;
+using Content.Shared.Silicons.Borgs.Components;
 
 namespace Content.Server.DeadSpace.Abilities.StunRadius;
 
@@ -91,6 +92,7 @@ public sealed partial class StunRadiusSystem : EntitySystem
 
         if (!string.IsNullOrEmpty(component.EffectPrototype))
         {
+
             var forcePowerEnt = Spawn(component.EffectPrototype, Transform(uid).Coordinates);
 
             if (TryComp<TimedDespawnComponent>(forcePowerEnt, out var timedDespawnComp))
@@ -152,6 +154,9 @@ public sealed partial class StunRadiusSystem : EntitySystem
                 continue;
 
             if (component.IgnorAlien && _npcFaction.IsEntityFriendly(uid, entity))
+                continue;
+
+            if (HasComp<BorgChassisComponent>(entity) && !component.StunBorg)
                 continue;
 
             if (!_interaction.InRangeUnobstructed(uid, entity, 0f, CollisionGroup.Opaque))
