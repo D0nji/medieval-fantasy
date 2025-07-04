@@ -15,7 +15,7 @@
   - type: Sprite
     sprite: Mobs/Aliens/Argocyte/argocyte_common.rsi
   - type: SolutionContainerManager
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: XenomorphLanguage
     languagesId:
     - XenomorphLanguage

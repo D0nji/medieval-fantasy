@@ -165,7 +165,7 @@
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepBounce
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: KangarooLanguage
     languagesId:
     - KangarooLanguage
@@ -248,7 +248,7 @@
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 4
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: ArachnidLanguage
     languagesId:
     - ArachnidLanguage

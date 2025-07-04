@@ -221,7 +221,7 @@
   - type: EmoteAnimation # ADT-Emotes
   - type: EmotePanel # DS14-Emote-panel
   - type: LieDown # DS14
-  - type: Language # DS14
+  - type: Language # DS14-Languages
     selectedLanguage: GeneralLanguage
     languagesId:
     - GeneralLanguage

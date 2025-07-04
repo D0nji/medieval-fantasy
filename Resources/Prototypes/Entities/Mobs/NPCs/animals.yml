@@ -51,7 +51,7 @@
     flavorKind: station-event-random-sentience-flavor-organic
   - type: Bloodstream
     bloodMaxVolume: 50
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: MouseLanguage
     languagesId:
     - MouseLanguage
@@ -249,7 +249,7 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: ChickenLanguage
     languagesId:
     - ChickenLanguage
@@ -551,7 +551,7 @@
       amount: 2
   - type: Extractable
     grindableSolutionName: food
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: MothLanguage
     languagesId:
     - MothLanguage
@@ -694,7 +694,7 @@
     eggSpawn:
     - id: FoodEgg
   - type: ExaminableHunger
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: ChickenLanguage
     languagesId:
     - ChickenLanguage
@@ -908,7 +908,7 @@
     guides:
     - Chef
     - FoodRecipes
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: CowLanguage
     languagesId:
     - CowLanguage
@@ -969,7 +969,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: CrabLanguage
     languagesId:
     - CrabLanguage
@@ -1228,7 +1228,7 @@
   - type: Inventory
     speciesId: kangaroo
     templateId: kangaroo
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: KangarooLanguage
     languagesId:
     - KangarooLanguage
@@ -1506,7 +1506,7 @@
   - type: NameIdentifier
     group: Kobold
   - type: LizardAccent
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: KoboltLanguage
     languagesId:
     - KoboltLanguage
@@ -1789,7 +1789,7 @@
     spawned:
     - id: FoodMeatRat
       amount: 1
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: MouseLanguage
     languagesId:
     - MouseLanguage
@@ -2418,7 +2418,7 @@
   - type: MeleeChemicalInjector
     transferAmount: 0.75
     solution: melee
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: XenomorphLanguage
     languagesId:
     - XenomorphLanguage
@@ -2838,7 +2838,7 @@
     spawned:
     - id: FoodMeat
       amount: 2
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: DogLanguage
     languagesId:
     - DogLanguage
@@ -2990,7 +2990,7 @@
     spawned:
     - id: FoodMeat
       amount: 3
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: CatLanguage
     languagesId:
     - CatLanguage
@@ -3385,7 +3385,7 @@
     spawned:
     - id: FoodMeat
       amount: 1
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: MouseLanguage
     languagesId:
     - MouseLanguage
@@ -3496,7 +3496,7 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       path: /Audio/Animals/pig_oink.ogg
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: PigLanguage
     languagesId:
     - PigLanguage
@@ -3595,7 +3595,7 @@
   id: MobDionaNymphAccent # No talky. For non-brain & wild nymphs
   suffix: Accent
   components:
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: DionaLanguage
     languagesId:
     - DionaLanguage

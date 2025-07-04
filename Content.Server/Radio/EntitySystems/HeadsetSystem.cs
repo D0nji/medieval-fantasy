@@ -20,7 +20,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; //DS
+    [Dependency] private readonly LanguageSystem _language = default!; // DS14-Languages
 
     public override void Initialize()
     {

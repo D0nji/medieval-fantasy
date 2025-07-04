@@ -112,7 +112,7 @@ public sealed partial class ZombieSystem
         RemComp<LegsParalyzedComponent>(target);
         RemComp<ComplexInteractionComponent>(target);
 
-        // DS-Start
+        // DS14-Languages-Start
         if (HasComp<LanguageComponent>(target))
             RemComp<LanguageComponent>(target);
 
@@ -120,7 +120,7 @@ public sealed partial class ZombieSystem
         langComp.LanguagesId.Add("ZombieLanguage");
         langComp.SelectedLanguage = "ZombieLanguage";
         AddComp(target, langComp);
-        // DS-End
+        // DS14-Languages-End
 
         //funny voice
         var accentType = "zombie";

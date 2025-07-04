@@ -111,7 +111,7 @@
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
   - type: ImmunitetInfectionDead # DS14
-  - type: Language # DS14
+  - type: Language # DS14-Languages
     selectedLanguage: GeneralLanguage
     languagesId:
     - GeneralLanguage

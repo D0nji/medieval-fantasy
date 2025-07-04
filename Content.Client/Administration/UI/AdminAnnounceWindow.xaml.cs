@@ -19,7 +19,7 @@ namespace Content.Client.Administration.UI
         [Dependency] private readonly ILocalizationManager _localization = default!;
 
         private readonly List<TTSVoicePrototype> _voices; // Corvax-TTS
-        private readonly List<LanguagePrototype> _languages; // DS
+        private readonly List<LanguagePrototype> _languages; // DS14-Languages
         public Action<string>? OnVoiceChange; // Corvax-TTS
 
         public AdminAnnounceWindow()
@@ -34,7 +34,7 @@ namespace Content.Client.Administration.UI
             AnnounceMethod.SetItemMetadata(1, AdminAnnounceType.Server);
             AnnounceMethod.OnItemSelected += AnnounceMethodOnOnItemSelected;
             VoiceSelector.OnItemSelected += AnnounceMethodOnOnTTSItemSelected;
-            LanguageSelector.OnItemSelected += AnnounceMethodOnLanguageSelected;
+            LanguageSelector.OnItemSelected += AnnounceMethodOnLanguageSelected; // DS14-Languages
             Announcement.OnKeyBindUp += AnnouncementOnOnTextChanged;
 
             // Corvax-TTS-Start
@@ -51,7 +51,7 @@ namespace Content.Client.Administration.UI
             }
             // Corvax-TTS-End
 
-            // DS-Start
+            // DS14-Languages-Start
             _languages = IoCManager
                 .Resolve<IPrototypeManager>()
                 .EnumeratePrototypes<LanguagePrototype>()
@@ -63,7 +63,7 @@ namespace Content.Client.Administration.UI
                 LanguageSelector.AddItem(name);
                 LanguageSelector.SetItemMetadata(i, _languages[i].ID);
             }
-            // DS-End
+            // DS14-Languages-End
         }
 
         private void AnnouncementOnOnTextChanged(GUIBoundKeyEventArgs args)
@@ -84,11 +84,11 @@ namespace Content.Client.Administration.UI
         }
         // Corvax-TTS-End
 
-        // DS-Start
+        // DS14-Languages-Start
         private void AnnounceMethodOnLanguageSelected(OptionButton.ItemSelectedEventArgs args)
         {
             LanguageSelector.SelectId(args.Id);
         }
-        // DS-End
+        // DS14-Languages-End
     }
 }

@@ -8,6 +8,7 @@ using Content.Shared.Actions;
 using Robust.Shared.Player;
 using Content.Shared.DeadSpace.Languages;
 using Robust.Server.Player;
+using Robust.Server.Audio;
 
 namespace Content.Server.DeadSpace.Languages;
 
@@ -17,6 +18,7 @@ public sealed class LanguageSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -99,6 +101,23 @@ public sealed class LanguageSystem : EntitySystem
             return false;
 
         return languages.Contains(senderLanguageId);
+    }
+
+    public void PlayLexiconSound(ICommonSession session, string prototypeId)
+    {
+        if (!_prototypeManager.TryIndex<LanguagePrototype>(prototypeId, out var languageProto))
+            return;
+
+        if (languageProto.LexiconSound != null)
+            _audio.PlayGlobal(languageProto.LexiconSound, session);
+    }
+
+    public bool NeedGenerateTTS(string prototypeId)
+    {
+        if (!_prototypeManager.TryIndex<LanguagePrototype>(prototypeId, out var languageProto))
+            return true;
+
+        return languageProto.GenerateTTSForLexicon;
     }
 
     public ICommonSession[] GetUnderstanding(string languageId)

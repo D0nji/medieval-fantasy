@@ -120,7 +120,7 @@
   abstract: true
   description: It looks so much like jelly. I wonder what it tastes like?
   components:
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: SlimeLanguage
     languagesId:
     - SlimeLanguage

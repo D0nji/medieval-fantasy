@@ -2,6 +2,7 @@
 
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Robust.Shared.Audio;
 
 namespace Content.Shared.DeadSpace.Languages.Prototypes;
 
@@ -19,4 +20,10 @@ public sealed partial class LanguagePrototype : IPrototype
 
     [DataField]
     public string Name = string.Empty;
+
+    [DataField]
+    public bool GenerateTTSForLexicon = true;
+
+    [DataField]
+    public SoundSpecifier? LexiconSound;
 }

@@ -50,7 +50,7 @@
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: cat
   - type: Physics
-  - type: Language
+  - type: Language # DS14-Languages
     selectedLanguage: CatLanguage
     languagesId:
     - CatLanguage

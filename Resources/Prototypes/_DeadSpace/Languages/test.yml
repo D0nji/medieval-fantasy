@@ -1,12 +1,20 @@
 - type: language
   id: language1
   name: один
+  icon: /Textures/_DeadSpace/LanguageIcons/alien.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: ChickenLexicon
   lexicon:
   - blue
 
 - type: language
   id: language2
   name: два
+  icon: /Textures/_DeadSpace/LanguageIcons/alien.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: XenoLexicon
   lexicon:
   - red
 

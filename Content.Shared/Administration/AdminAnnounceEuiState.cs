@@ -23,7 +23,7 @@ namespace Content.Shared.Administration
             public string Announcer = default!;
             public string Announcement = default!;
             public AdminAnnounceType AnnounceType;
-            public string LanguageId = default!; // DS
+            public string LanguageId = default!; // DS14-Languages
             public string Voice = default!; // Corvax-TTS
             public bool EnableTTS = default!; // Corvax-TTS
             public bool CustomTTS = default!; // Corvax-TTS

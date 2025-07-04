@@ -217,6 +217,9 @@
   id: ArachnidLanguage
   name: Арахнидский
   icon: /Textures/_DeadSpace/LanguageIcons/spider.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: SpiderLexicon
   lexicon:
   - Црик
   - Тррч
@@ -320,6 +323,9 @@
 - type: language
   id: DionaLanguage
   name: Дионский
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: DionaLexicon
   lexicon:
   - Друуу...
   - Шаар...
@@ -532,6 +538,9 @@
   id: MothLanguage
   name: Мольский
   icon: /Textures/_DeadSpace/LanguageIcons/moth.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: MothLexicon
   lexicon:
   - Мшш...
   - Пшн
@@ -639,6 +648,9 @@
   id: ReptilianLanguage
   name: Рептилойдский
   icon: /Textures/_DeadSpace/LanguageIcons/clock.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: ReptilianLexicon
   lexicon:
   - Шссс
   - Хррр
@@ -744,6 +756,9 @@
   id: VoxLanguage
   name: Вокский
   icon: /Textures/_DeadSpace/LanguageIcons/vox.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: VoxLexicon
   lexicon:
   - Чирик!
   - Твиии!
@@ -956,6 +971,9 @@
   id: CatLanguage
   name: Кошачий
   icon: /Textures/_DeadSpace/LanguageIcons/cat.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: CatLexicon
   lexicon:
   - Мяу~
   - Мррр
@@ -1062,6 +1080,9 @@
   id: MachineLanguage
   name: Машинный
   icon: /Textures/_DeadSpace/LanguageIcons/machine.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: MachineLexicon
   lexicon:
   - 0 1 0 1
   - 1 1 0 0
@@ -1486,6 +1507,9 @@
   id: XenomorphLanguage
   name: Ксеноморфский
   icon: /Textures/_DeadSpace/LanguageIcons/alien.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: XenoLexicon
   lexicon:
   - шшхх
   - хрррк
@@ -1682,6 +1706,9 @@
   id: ZombieLanguage
   name: Зомбячий
   icon: /Textures/_DeadSpace/LanguageIcons/zombie.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: ZombieScreams
   lexicon:
   - уууу...
   - гааа...
@@ -1767,6 +1794,9 @@
 - type: language
   id: ChickenLanguage
   name: Куриный
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: ChickenLexicon
   lexicon:
   - ко-ко!
   - куд-кудах
@@ -1783,6 +1813,9 @@
   id: DogLanguage
   name: Собачий
   icon: /Textures/_DeadSpace/LanguageIcons/vulp.png
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: DogLexicon
   lexicon:
   - Гав!
   - Тяв!
@@ -1793,6 +1826,9 @@
 - type: language
   id: NecromorfLanguage
   name: Некроморфский
+  generateTTSForLexicon: false
+  lexiconSound:
+    collection: NecroScreams
   lexicon:
   - гррха
   - блррр

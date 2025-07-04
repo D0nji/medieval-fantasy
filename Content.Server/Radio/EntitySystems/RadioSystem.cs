@@ -35,7 +35,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly LanguageSystem _language = default!; //DS
+    [Dependency] private readonly LanguageSystem _language = default!; // DS14-Languages
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -167,7 +167,7 @@ public sealed class RadioSystem : EntitySystem
             null);
         var chatMsg = new MsgChatMessage { Message = chat };
 
-        // DS-Start
+        // DS14-Languages-Start
         var lexiconMessage = message;
         var chatMsgLexicon = chatMsg;
 
@@ -208,7 +208,7 @@ public sealed class RadioSystem : EntitySystem
             languageId = language.SelectedLanguage;
 
         var ev = new RadioReceiveEvent(message, languageId, messageSource, channel, radioSource, chatMsg, chatMsgLexicon, []);
-        // DS-End
+        // DS14-End
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
