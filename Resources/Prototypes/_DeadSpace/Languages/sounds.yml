@@ -46,8 +46,8 @@
 - type: soundCollection
   id: MothLexicon
   files:
-  - /Audio/Voice/LangMothuages/moth_chitter.ogg
-  - /Audio/_DeadSpace/Languages/moth_squeak.ogg
+  - /Audio/Voice/Moth/moth_chitter.ogg
+  - /Audio/Voice/Moth/moth_squeak.ogg
 
 - type: soundCollection
   id: DogLexicon
