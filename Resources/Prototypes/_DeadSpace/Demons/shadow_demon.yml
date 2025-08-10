@@ -196,10 +196,6 @@
       100: Dead
   - type: Stamina
   - type: Appearance
-  - type: Language
-    selectedLanguage: DemonLanguage
-    languagesId:
-    - DemonLanguage
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Demon
