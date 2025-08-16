@@ -123,6 +123,7 @@
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
   - type: Sanity # DS14
+  - type: Skill # DS14
   - type: SlimePerson # DS14: For emote panel
   - type: Language # DS14-Languages
     selectedLanguage: GeneralLanguage

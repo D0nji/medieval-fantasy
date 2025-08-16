@@ -80,6 +80,7 @@
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
   - type: Sanity # DS14
+  - type: Skill # DS14
   - type: Language # DS14-Languages
     selectedLanguage: GeneralLanguage
     languagesId:

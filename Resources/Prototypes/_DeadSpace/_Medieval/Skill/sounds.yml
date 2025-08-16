@@ -1,0 +1,8 @@
+- type: soundCollection
+  id: LearnBook
+  files:
+  - /Audio/_DeadSpace/_Medieval/Skill/book1.ogg
+  - /Audio/_DeadSpace/_Medieval/Skill/book2.ogg
+  - /Audio/_DeadSpace/_Medieval/Skill/book3.ogg
+  - /Audio/_DeadSpace/_Medieval/Skill/book4.ogg
+  - /Audio/_DeadSpace/_Medieval/Skill/book5.ogg

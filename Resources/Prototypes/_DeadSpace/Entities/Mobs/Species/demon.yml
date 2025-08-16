@@ -43,6 +43,7 @@
         Heat : 0.3 #per second, scales with temperature & other constants
   - type: Perishable
   - type: Sanity # DS14
+  - type: Skill # DS14
   - type: Vocal
     sounds:
       Male: MaleHuman

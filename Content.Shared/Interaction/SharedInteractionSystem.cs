@@ -6,6 +6,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.Database;
+using Content.Shared.DeadSpace.Medieval.Skills.Events;
 using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -1022,6 +1023,15 @@ namespace Content.Shared.Interaction
                 return true;
 
             DebugTools.Assert(!IsDeleted(user) && !IsDeleted(used) && !IsDeleted(target));
+
+            // DS14-Skill-Start
+            var beforeInteractUsingEvent = new BeforeInteractUsingEvent(user, used, target);
+            RaiseLocalEvent(used, beforeInteractUsingEvent, true);
+
+            if (beforeInteractUsingEvent.Handled)
+                return true;
+            // DS14-Skill-End
+
             // all interactions should only happen when in range / unobstructed, so no range check is needed
             var interactUsingEvent = new InteractUsingEvent(user, used, target, clickLocation);
             RaiseLocalEvent(target, interactUsingEvent, true);
@@ -1135,6 +1145,14 @@ namespace Content.Shared.Interaction
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
             if (checkAccess && !IsAccessible(user, used))
                 return false;
+
+            // DS14-Skill-Start
+            var beforeInteractionActivate = new BeforeInteractionActivate(user, used);
+            RaiseLocalEvent(used, beforeInteractionActivate, true);
+
+            if (beforeInteractionActivate.Handled)
+                return true;
+            // DS14-Skill-End
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
             var activateMsg = new ActivateInWorldEvent(user, used, complexInteractions.Value);

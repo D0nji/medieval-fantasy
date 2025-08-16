@@ -135,7 +135,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
             return;
         }
 
-        var (entity, job, objectives, briefing, entityName) = data;
+        var (entity, job, objectives, skills, briefing, entityName) = data;
 
         _window.SpriteView.SetEntity(entity);
 
@@ -146,49 +146,47 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
         _window.Objectives.RemoveAllChildren();
         _window.ObjectivesLabel.Visible = objectives.Any();
 
-        // start backmen: currency
+        // DS14-Skills-Start
         {
-            _window.Memory.RemoveAllChildren();
-            foreach (var (groupId, conditions) in objectives)
+            var skillsControl = new CharacterObjectiveControl
             {
-                if (groupId != "SpaceBank")
-                {
-                    continue;
-                }
-                var objectiveControl = new CharacterObjectiveControl
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Vertical,
-                    Modulate = Color.Gray
-                };
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                Modulate = Color.Gray
+            };
 
-                objectiveControl.AddChild(new Label
-                {
-                    Text = groupId,
-                    Modulate = Color.LightSkyBlue
-                });
+            var text = new FormattedMessage();
+            text.TryAddMarkup("Навыки", out _);
 
-                foreach (var condition in conditions)
-                {
-                    var conditionControl = new ObjectiveConditionsControl();
-                    conditionControl.ProgressTexture.Texture = _sprite.Frame0(condition.Icon);
-                    conditionControl.ProgressTexture.Progress = condition.Progress;
+            var label = new RichTextLabel
+            {
+                StyleClasses = { StyleNano.StyleClassTooltipActionTitle }
+            };
+            label.SetMessage(text);
 
-                    var titleMessage = new FormattedMessage();
-                    var descriptionMessage = new FormattedMessage();
+            skillsControl.AddChild(label);
 
-                    titleMessage.AddText(condition.Title);
-                    descriptionMessage.AddText(condition.Description);
+            foreach (var skill in skills)
+            {
+                var conditionControl = new ObjectiveConditionsControl();
+                conditionControl.ProgressTexture.Texture = _sprite.Frame0(skill.Icon);
+                conditionControl.ProgressTexture.Progress = skill.Progress;
 
-                    conditionControl.Title.SetMessage(titleMessage);
-                    conditionControl.Description.SetMessage(descriptionMessage);
+                var titleMessage = new FormattedMessage();
+                var descriptionMessage = new FormattedMessage();
 
-                    objectiveControl.AddChild(conditionControl);
-                }
+                titleMessage.AddText(skill.Name);
+                descriptionMessage.AddText(skill.Description);
 
-                _window.Memory.AddChild(objectiveControl);
+                conditionControl.Title.SetMessage(titleMessage);
+                conditionControl.Description.SetMessage(descriptionMessage);
+
+                skillsControl.AddChild(conditionControl);
             }
+
+            _window.Objectives.AddChild(skillsControl);
         }
-        // end backmen: currency
+
+        // DS14-Skills-End
 
         foreach (var (groupId, conditions) in objectives)
         {
