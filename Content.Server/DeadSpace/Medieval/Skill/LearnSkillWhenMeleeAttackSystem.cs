@@ -6,7 +6,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Server.DeadSpace.Medieval.Skill;
 
-public sealed class LearnSkillWhenMeleeAttackSystem : NeededSkillSystem
+public sealed class LearnSkillWhenMeleeAttackSystem : EntitySystem
 {
     [Dependency] private readonly SkillSystem _skillSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;

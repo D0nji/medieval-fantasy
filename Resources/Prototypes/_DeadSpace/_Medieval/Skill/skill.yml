@@ -13,7 +13,7 @@
   - type: Skill
     skills:
       test: 1
-    MaxLimit:
+    maxLimit:
       test: 1
 
 - type: entity
