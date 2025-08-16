@@ -1,0 +1,73 @@
+- type: entity
+  id: ActionJump
+  name: Прыгает в точку
+  description: Прыжок в выбранную точку.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: WorldTargetAction
+    useDelay: 10
+    icon:
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_savannah
+    itemIconStyle: NoItem
+    priority: -1
+    event: !type:JumpToPointActionEvent
+    checkCanAccess: false
+    range: 0
+
+- type: entity
+  id: ActionGiveIntelligence
+  name: Наделить разумом
+  description: Даёт цели разум, цель присоединяется к восстанию.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EntityTargetAction
+    useDelay: 5
+    icon: _DeadSpace/Sith/actions/submission.png
+    event: !type:GiveIntelligenceActionEvent
+
+- type: entity
+  id: ActionArmy
+  name: Призвать обезьяну
+  description: Призывает обезьяну со случайным оружием.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 20
+    icon: _DeadSpace/MonkeyKing/icons/army.png
+    event: !type:ArmyEvent
+
+- type: entity
+  id: ActionKingBuff
+  name: Воодушивить союзников
+  description: Увеличивает характеристики ближайших обезьян.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 30
+    icon: _DeadSpace/MonkeyKing/icons/flag.png
+    event: !type:KingBuffActionEvent
+
+- type: entity
+  id: ActionStunRadiusMonkeyKing
+  name: Удар
+  description: Нанести сокрушительный удар, ударная волна которого снесёт всё на своём пути.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InstantAction
+    useDelay: 30
+    icon: _DeadSpace/MonkeyKing/icons/attack.png
+    event: !type:StunRadiusActionEvent
+
+- type: entity
+  id: ActionMonkeyKingBanana
+  name: "[color=yellow]Банан![/color]"
+  description: Сбейте своих врагов с ног большим бананом!
+  components:
+  - type: WorldTargetAction
+    icon: { sprite : Objects/Specific/Hydroponics/banana.rsi, state: produce }
+    event: !type:ActionGunShootEvent
+    priority: 2
+    checkCanAccess: false
+    range: 0
+    itemIconStyle: BigAction

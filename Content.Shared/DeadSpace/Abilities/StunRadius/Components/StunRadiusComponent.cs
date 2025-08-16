@@ -11,34 +11,57 @@ namespace Content.Shared.DeadSpace.Abilities.StunRadius.Components;
 [AutoGenerateComponentState]
 public sealed partial class StunRadiusComponent : Component
 {
+    [ViewVariables(VVAccess.ReadOnly)]
+    public TimeSpan TimeUntilEndAnimation = TimeSpan.Zero;
+
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public float DurationAnimation = 0f;
+
+    [DataField]
+    public string EffectPrototype = string.Empty;
+
     [DataField("actionStunRadius", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string ActionStunRadius = "ActionStunRadius";
 
-    [DataField("actionStunRadiusEntity")]
+    [DataField]
     public EntityUid? ActionStunRadiusEntity;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("paralyzeTime"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWrite)]
     public float ParalyzeTime = 3f;
 
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("launchForwardsMultiplier"), AutoNetworkedField]
-    [Access(Other = AccessPermissions.ReadWrite)]
-    public float LaunchForwardsMultiplier = 1f;
-
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("rangeStun"), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     [Access(Other = AccessPermissions.ReadWrite)]
     public float RangeStun = 5f;
 
-    [DataField("stunRadiusSound")]
+    [DataField]
     public SoundSpecifier? StunRadiusSound = default;
 
-    [DataField("ignorAlien")]
+    [DataField]
     public bool IgnorAlien = true;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("stunBorg")]
+    public bool IsRunning = false;
+
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public float BaseRadialAcceleration = -10f;
+
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public float BaseTangentialAcceleration = 0f;
+
+    [DataField]
+    public float Strenght = 0f;
+
+    #region Visualizer
+    [DataField]
+    public string State = string.Empty;
+
+    [DataField]
+    public string StunState = string.Empty;
+    #endregion
+
+    [DataField]
     public bool StunBorg = false;
+
 }

@@ -1404,6 +1404,7 @@
     - VimPilot
     - DoorBumpOpener
     - AnomalyHost
+    - MonkeyKingTarget
   - type: Reactive
     groups:
       Flammable: [ Touch ]
