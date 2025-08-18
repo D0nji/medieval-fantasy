@@ -1,0 +1,38 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: MedievalClothingUniformTest
+  name: teal jumpsuit
+  description: A generic teal jumpsuit with no rank markings.
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Clothing/Test/color.rsi
+    layers:
+    - state: icon
+      color: "#77f3b7"
+    - state: trinkets-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#77f3b7"
+      - state: trinkets-inhand-left
+      right:
+      - state: inhand-right
+        color: "#77f3b7"
+      - state: trinkets-inhand-right
+  - type: Clothing
+    sprite: _DeadSpace/_Medieval/Clothing/Test/color.rsi
+    clothingVisuals:
+      jumpsuit:
+      - state: equipped-INNERCLOTHING-male
+        color: "#77f3b7"
+      - state: trinkets-equipped-INNERCLOTHING
+      jumpsuit-Male:
+      - state: equipped-INNERCLOTHING-male
+        color: "#77f3b7"
+      - state: trinkets-equipped-INNERCLOTHING
+      jumpsuit-Female:
+      - state: equipped-INNERCLOTHING-female
+        color: "#77f3b7"
+      - state: trinkets-equipped-INNERCLOTHING
+

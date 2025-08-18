@@ -1,0 +1,41 @@
+# Anything human specific (e.g. UI, input) goes under MobHuman
+- type: entity
+  parent: BaseMobSpeciesOrganic
+  id: MedievalBaseMobHuman
+  name: Urist McHands
+  abstract: true
+  components:
+  - type: Hunger
+  - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: full
+  - type: Body
+    prototype: MedievalHuman
+    requiredLegs: 2
+  - type: Thirst
+  - type: Butcherable
+    butcheringType: Spike
+    spawned:
+    - id: FoodMeatHuman
+      amount: 5
+  - type: HumanoidAppearance
+    species: MedievalHuman
+    # hideLayersOnEquip:
+    # - Hair
+    # - Snout
+  - type: Inventory
+    sexSpecificSprites: true
+    # femaleDisplacements:
+    #   jumpsuit:
+    #     sizeMaps:
+    #       32:
+    #         sprite: Mobs/Species/Human/displacement.rsi
+    #         state: jumpsuit-female
+  - type: Sanity # DS14
+  - type: Skill # DS14
+  # - type: FootPrints # Backmen-footsteps
+
+- type: entity
+  parent: MobHumanDummy
+  id: MedievalMobHumanDummy
+  categories: [ HideSpawnMenu ]

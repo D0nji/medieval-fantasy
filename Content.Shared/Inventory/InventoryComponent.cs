@@ -33,6 +33,12 @@ public sealed partial class InventoryComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<string, DisplacementData> MaleDisplacements = new();
+
+    /// <summary>
+    ///     DS14 разделять спрайты женщин и мужчин по префексу?
+    /// </summary>
+    [DataField]
+    public bool SexSpecificSprites = false;
 }
 
 /// <summary>

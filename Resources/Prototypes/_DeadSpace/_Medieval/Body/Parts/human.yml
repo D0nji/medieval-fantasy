@@ -1,0 +1,106 @@
+# TODO: Add descriptions (many)
+# TODO BODY: Part damage
+
+- type: entity
+  id: MedievalTorsoHuman
+  name: "human torso"
+  parent: [PartHuman, BaseTorso]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "torso_m"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 10
+      - ReagentId: Blood
+        Quantity: 20
+
+- type: entity
+  id: MedievalHeadHuman
+  name: "human head"
+  parent: [PartHuman, BaseHead]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "head_m"
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 5
+      - ReagentId: Blood
+        Quantity: 10
+
+- type: entity
+  id: MedievalLeftArmHuman
+  name: "left human arm"
+  parent: [PartHuman, BaseLeftArm]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "l_arm"
+
+- type: entity
+  id: MedievalRightArmHuman
+  name: "right human arm"
+  parent: [PartHuman, BaseRightArm]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "r_arm"
+
+- type: entity
+  id: MedievalLeftHandHuman
+  name: "left human hand"
+  parent: [PartHuman, BaseLeftHand]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "l_hand"
+
+- type: entity
+  id: MedievalRightHandHuman
+  name: "right human hand"
+  parent: [PartHuman, BaseRightHand]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "r_hand"
+
+- type: entity
+  id: MedievalLeftLegHuman
+  name: "left human leg"
+  parent: [PartHuman, BaseLeftLeg]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "l_leg"
+
+- type: entity
+  id: MedievalRightLegHuman
+  name: "right human leg"
+  parent: [PartHuman, BaseRightLeg]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "r_leg"
+
+- type: entity
+  id: MedievalLeftFootHuman
+  name: "left human foot"
+  parent: [PartHuman, BaseLeftFoot]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "l_foot"
+
+- type: entity
+  id: MedievalRightFootHuman
+  name: "right human foot"
+  parent: [PartHuman, BaseRightFoot]
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Mobs/Species/Human/parts.rsi
+    state: "r_foot"

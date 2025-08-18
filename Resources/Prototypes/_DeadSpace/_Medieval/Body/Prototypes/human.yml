@@ -1,0 +1,49 @@
+﻿- type: body
+  id: MedievalHuman
+  name: "human"
+  root: torso
+  slots:
+    head:
+      part: MedievalHeadHuman
+      connections:
+      - torso
+      organs:
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
+    torso:
+      part: MedievalTorsoHuman
+      connections:
+      - right_arm
+      - left_arm
+      - right_leg
+      - left_leg
+      organs:
+        heart: OrganHumanHeart
+        lungs: OrganHumanLungs
+        stomach: OrganHumanStomach
+        liver: OrganHumanLiver
+        kidneys: OrganHumanKidneys
+    right_arm:
+      part: MedievalRightArmHuman
+      connections:
+      - right_hand
+    left_arm:
+      part: MedievalLeftArmHuman
+      connections:
+      - left_hand
+    right_hand:
+      part: MedievalRightHandHuman
+    left_hand:
+      part: MedievalLeftHandHuman
+    right_leg:
+      part: MedievalRightLegHuman
+      connections:
+      - right_foot
+    left_leg:
+      part: MedievalLeftLegHuman
+      connections:
+      - left_foot
+    right_foot:
+      part: MedievalRightFootHuman
+    left_foot:
+      part: MedievalLeftFootHuman
