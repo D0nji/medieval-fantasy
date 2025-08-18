@@ -478,8 +478,8 @@
     children:
     - !type:NestedSelector
       tableId: RandomSatchelAlcoholTable
-    - !type:NestedSelector
-      tableId: RandomSatchelInstrumentTable
+    # - !type:NestedSelector
+    #   tableId: RandomSatchelInstrumentTable
     - !type:NestedSelector
       tableId: RandomSatchelMedsTable
     - !type:NestedSelector
@@ -504,18 +504,18 @@
       amount: !type:RangeNumberSelector
         range: 1, 4
 
-- type: entityTable
-  id: RandomSatchelInstrumentTable
-  table: !type:GroupSelector
-    children:
-    - id: SpaceCash100
-      weight: 15
-    - id: SeashellInstrument
-    - id: MusicalLungInstrument
-    - id: HelicopterInstrument
-    - id: GunpetInstrument
-    - id: RockGuitarInstrument
-    - id: BassGuitarInstrument
+# - type: entityTable
+#   id: RandomSatchelInstrumentTable
+#   table: !type:GroupSelector
+#     children:
+#     - id: SpaceCash100
+#       weight: 15
+#     - id: SeashellInstrument
+#     - id: MusicalLungInstrument
+#     - id: HelicopterInstrument
+#     - id: GunpetInstrument
+#     - id: RockGuitarInstrument
+#     - id: BassGuitarInstrument
 
 - type: entityTable
   id: RandomSatchelMedsTable
