@@ -100,8 +100,19 @@ public sealed class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
         if (protoId == null)
             return;
 
+        // DS14-Medieval-Start
+        var oldId = protoId;
+
         if (sexMorph)
-            protoId = HumanoidVisualLayersExtension.GetSexMorph(key, component.Sex, protoId);
+        {
+            var newId = HumanoidVisualLayersExtension.GetSexMorph(key, component.Sex, protoId);
+
+            if (_prototypeManager.HasIndex<HumanoidSpeciesSpriteLayer>(newId))
+                protoId = newId;
+            else
+                protoId = oldId;
+        }
+        // DS14-Medieval-End
 
         var proto = _prototypeManager.Index<HumanoidSpeciesSpriteLayer>(protoId);
         component.BaseLayers[key] = proto;

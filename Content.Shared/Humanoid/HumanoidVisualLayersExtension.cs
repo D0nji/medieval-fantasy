@@ -11,6 +11,17 @@ namespace Content.Shared.Humanoid
             {
                 HumanoidVisualLayers.Chest => true,
                 HumanoidVisualLayers.Head => true,
+                // DS14-Medieval-Start
+                HumanoidVisualLayers.RArm => true,
+                HumanoidVisualLayers.LArm => true,
+                HumanoidVisualLayers.RHand => true,
+                HumanoidVisualLayers.LHand => true,
+                HumanoidVisualLayers.LLeg => true,
+                HumanoidVisualLayers.RLeg => true,
+                HumanoidVisualLayers.RFoot => true,
+                HumanoidVisualLayers.LFoot => true,
+                HumanoidVisualLayers.Eyes => true,
+                // DS14-Medieval-End
                 _ => false
             };
         }
