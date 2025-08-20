@@ -11,7 +11,7 @@ using Robust.Server.Audio;
 
 namespace Content.Server.DeadSpace.Medieval.Skill;
 
-public sealed class LearnSkillWhenUsingSystem : NeededSkillSystem
+public sealed class LearnSkillWhenUsingSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SkillSystem _skillSystem = default!;

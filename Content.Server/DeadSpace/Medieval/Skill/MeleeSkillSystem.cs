@@ -5,7 +5,7 @@ using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Server.DeadSpace.Medieval.Skill;
 
-public sealed class MeleeSkillSystem : NeededSkillSystem
+public sealed class MeleeSkillSystem : EntitySystem
 {
     [Dependency] private readonly SkillSystem _skillSystem = default!;
     public override void Initialize()

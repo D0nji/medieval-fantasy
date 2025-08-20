@@ -35,4 +35,7 @@
       - state: equipped-INNERCLOTHING-female
         color: "#77f3b7"
       - state: trinkets-equipped-INNERCLOTHING
+  - type: Wear
+    currentPoints: 10
+    maxPoints: 10
 
