@@ -295,11 +295,12 @@ public sealed class FaxSystem : EntitySystem
 
                     args.Data.TryGetValue(FaxConstants.FaxPaperLabelData, out string? label);
                     args.Data.TryGetValue(FaxConstants.FaxPaperStampStateData, out string? stampState);
+                    args.Data.TryGetValue(FaxConstants.FaxPaperSignaturesData, out List<string>? signatures); // DS14-Signatures
                     args.Data.TryGetValue(FaxConstants.FaxPaperStampedByData, out List<StampDisplayInfo>? stampedBy);
                     args.Data.TryGetValue(FaxConstants.FaxPaperPrototypeData, out string? prototypeId);
                     args.Data.TryGetValue(FaxConstants.FaxPaperLockedData, out bool? locked);
 
-                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false);
+                    var printout = new FaxPrintout(content, name, label, prototypeId, stampState, stampedBy, locked ?? false, signatures);
                     Receive(uid, printout, args.SenderAddress);
 
                     break;
@@ -472,7 +473,8 @@ public sealed class FaxSystem : EntitySystem
                                        metadata.EntityPrototype?.ID ?? component.PrintPaperId,
                                        paper.StampState,
                                        paper.StampedBy,
-                                       paper.EditingDisabled);
+                                       paper.EditingDisabled,
+                                       paper.Signatures);
 
         component.PrintingQueue.Enqueue(printout);
         component.SendTimeoutRemaining += component.SendTimeout;
@@ -526,6 +528,7 @@ public sealed class FaxSystem : EntitySystem
             { FaxConstants.FaxPaperLabelData, labelComponent?.CurrentLabel },
             { FaxConstants.FaxPaperContentData, paper.Content },
             { FaxConstants.FaxPaperLockedData, paper.EditingDisabled },
+            { FaxConstants.FaxPaperSignaturesData, paper.Signatures }, // DS14-Signatures
         };
 
         if (metadata.EntityPrototype != null)
@@ -594,6 +597,8 @@ public sealed class FaxSystem : EntitySystem
         if (TryComp<PaperComponent>(printed, out var paper))
         {
             _paperSystem.SetContent((printed, paper), printout.Content);
+
+            paper.Signatures = printout.Signatures ?? paper.Signatures; // DS14-Signatures
 
             // Apply stamps
             if (printout.StampState != null)
