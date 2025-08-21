@@ -97,6 +97,14 @@
     {
       "name": "eyes_f",
       "directions": 4
+    },
+    {
+      "name": "Female_Full",
+      "directions": 4
+    },
+    {
+      "name": "Male_Full",
+      "directions": 4
     }
   ]
 }
