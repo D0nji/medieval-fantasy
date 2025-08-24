@@ -1,0 +1,103 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: MedievalBaseMachine
+  suffix: Средневековье
+  components:
+  - type: Wear
+    currentPoints: 100
+    maxPoints: 100
+  - type: Animateable
+  - type: InteractionOutline
+  - type: Anchorable
+    delay: 2
+  - type: Physics
+    bodyType: Static
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+
+- type: entity
+  id: MedievalBaseLathe
+  parent:
+  - ConstructibleMachine
+  - MedievalBaseMachine
+  abstract: true
+  name: станок
+  components:
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+          - MachineLayer
+  - type: Lathe
+  - type: MaterialStorage
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Transform
+    anchored: true
+  - type: Pullable
+  - type: LatheWear
+    defaultAddPoints: -1
+  # - type: StaticPrice
+  #   price: 800
+  # - type: ResearchClient
+  # - type: TechnologyDatabase

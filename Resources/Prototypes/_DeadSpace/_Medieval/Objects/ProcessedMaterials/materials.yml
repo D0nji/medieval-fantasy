@@ -1,0 +1,7 @@
+- type: material
+  id: MedievalProcessedWood
+  stackEntity: MedievalBoard1
+  name: medieval-processed-materials-wood
+  color: "#8B4513"
+  icon: { sprite:  _DeadSpace/_Medieval/Objects/Materials/board.rsi, state: board }
+  price: 0

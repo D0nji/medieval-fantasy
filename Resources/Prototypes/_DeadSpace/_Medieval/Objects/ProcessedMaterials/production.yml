@@ -1,0 +1,55 @@
+- type: entity
+  parent: MedievalBaseProcessedMaterial
+  id: MedievalBoard
+  categories: [ HideSpawnMenu ]
+  name: доска
+  components:
+  - type: Material
+  - type: Stack
+    stackType: MedievalBoard
+    baseLayer: base
+    layerStates:
+    - board
+    - board_2
+    - board_3
+    - board_4
+  - type: Sprite
+    state: board_4
+    layers:
+    - state: board_4
+      map: ["base"]
+  - type: Item
+    heldPrefix: board
+  - type: Appearance
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedWood: 1000
+  - type: Tag
+    tags:
+    - CarpenterTableMaterialStorage
+  # - type: FloorTile
+  #   outputs:
+  #   - Plating
+
+- type: entity
+  parent: MedievalBoard
+  id: MedievalBoard1
+  name: доска
+  components:
+  - type: Sprite
+    state: board
+  - type: Stack
+    stackType: MedievalBoard
+    count: 1
+
+- type: entity
+  parent: MedievalBoard
+  id: SheetSteel5
+  name: доска
+  suffix: Средневековье, 5
+  components:
+  - type: Sprite
+    state: board
+  - type: Stack
+    stackType: MedievalBoard
+    count: 5

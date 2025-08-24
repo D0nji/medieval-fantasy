@@ -1,0 +1,32 @@
+# Base
+- type: latheRecipe
+  abstract: true
+  id: MedievalBaseSawmillRecipe
+  categories:
+  - MedievalWoodProcessing
+  completetime: 10
+
+- type: latheRecipe
+  abstract: true
+  id: MedievalBaseCarpenterTable
+  completetime: 10
+  categories:
+  - MedievalWoodProcessing
+
+## Total Sawmill
+- type: latheRecipe
+  parent: MedievalBaseSawmillRecipe
+  id: MedievalBoard
+  result: MedievalBoard1
+  completetime: 10
+  materials:
+    MedievalRawWood: 100
+
+## Total Carpenter Table
+- type: latheRecipe
+  parent: MedievalBaseCarpenterTable
+  id: MedievalTestDetail
+  result: MedievalCarpenterTableDetail
+  completetime: 10
+  materials:
+    MedievalProcessedWood: 100

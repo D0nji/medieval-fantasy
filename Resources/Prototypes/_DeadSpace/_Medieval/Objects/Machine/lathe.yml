@@ -1,0 +1,59 @@
+- type: entity
+  parent: MedievalBaseLathe
+  id: MedievalSawmill
+  name: пилорама
+  description: Станок из грубых досок и железных деталей.
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Objects/Machines/sawmill.rsi
+    layers:
+      - state: icon
+        map: ["enum.LatheVisualLayers.IsRunning"]
+      - state: inserting
+        map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  - type: Machine
+    board: MedievalSawmillDetail
+  - type: MaterialStorage
+    ignoreColor: true
+    whitelist:
+      tags:
+        - MedievalSawmillMaterialStorage
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    defaultProductionAmount: 1
+    staticPacks:
+    - MedievalSawmillStatic
+  - type: NeededSkillForInteract
+    neededSkills:
+    - MedievalWoodProcessing
+
+- type: entity
+  parent: MedievalBaseLathe
+  id: MedievalCarpenterTable
+  name: стол плотника
+  description: Рабочее место для изготовления деревянных изделий
+  components:
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Objects/Machines/carpenter_table.rsi
+    layers:
+      - state: icon
+        map: ["enum.LatheVisualLayers.IsRunning"]
+      - state: inserting
+        map: ["enum.MaterialStorageVisualLayers.Inserting"]
+  - type: Machine
+    board: MedievalCarpenterTableDetail
+  - type: MaterialStorage
+    ignoreColor: true
+    whitelist:
+      tags:
+        - CarpenterTableMaterialStorage
+  - type: Lathe
+    idleState: icon
+    runningState: building
+    defaultProductionAmount: 1
+    staticPacks:
+    - MedievalCarpenterTable
+  - type: NeededSkillForInteract
+    neededSkills:
+    - MedievalWoodProcessing

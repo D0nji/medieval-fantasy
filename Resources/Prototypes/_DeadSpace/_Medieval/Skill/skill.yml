@@ -1,0 +1,7 @@
+- type: skill
+  id: MedievalWoodProcessing
+  name: обработка дерева
+  description: Ремесло
+  pointsNeeded: 100
+  addLimit:
+    craft: 1

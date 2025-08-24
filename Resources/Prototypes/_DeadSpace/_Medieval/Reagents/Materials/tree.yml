@@ -1,0 +1,99 @@
+- type: damageModifierSet
+  id: MedievalWood
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.3
+    Heat: 1
+    Structural: 1
+
+- type: entity
+  id: BaseTreeMedieval
+  description: Да, это дерево.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Decoration/Flora/flora_trees.rsi
+    drawdepth: Overdoors
+    offset: 0,0.9
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.4,0.35,0.4"
+        density: 1000
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: MedievalWood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LogMedieval:
+            min: 1
+            max: 3
+
+- type: entity
+  parent: BaseTreeMedieval
+  id: BaseTreeLargeMedieval
+  abstract: true
+  name: большое дерево
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
+    offset: 0,1.55
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.18,-0.35,0.18,0.35"
+        density: 2000
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: BaseTreeMedieval
+  id: FloraTreeMedieval
+  name: дерево
+  components:
+  - type: Sprite
+    layers:
+    - state: tree01
+      map: ["random"]
+  - type: RandomSprite
+    available:
+    - random:
+        tree01: ""
+        tree02: ""
+        tree03: ""
+        tree04: ""
+        tree05: ""
+        tree06: ""
+

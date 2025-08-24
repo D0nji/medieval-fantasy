@@ -1,0 +1,6 @@
+- type: stack
+  id: MedievalBoard
+  name: доска
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/board.rsi, state: board }
+  spawn: MedievalBoard1
+  maxCount: 5

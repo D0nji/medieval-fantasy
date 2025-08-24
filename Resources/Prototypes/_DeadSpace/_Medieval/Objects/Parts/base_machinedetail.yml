@@ -1,0 +1,22 @@
+- type: entity
+  id: MedievalBaseMachineDetail
+  parent: BaseItem
+  name: деталь механизма
+  abstract: true
+  suffix: Средневековье
+  components:
+  - type: MachineBoard
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Objects/Materials/detail.rsi
+    state: detail
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: detail-inhand-left
+      right:
+      - state: detail-inhand-right
+  # - type: StaticPrice
+  #   price: 100
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 400

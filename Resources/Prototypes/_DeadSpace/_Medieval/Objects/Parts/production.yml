@@ -1,0 +1,23 @@
+- type: entity
+  id: MedievalSawmillDetail
+  parent: MedievalBaseMachineDetail
+  name: деталь пилорамы
+  components:
+  - type: MachineBoard
+    prototype: MedievalSawmill
+    stackRequirements: # Пока так
+      MatterBin: 1
+      Manipulator: 3
+      Glass: 1
+
+- type: entity
+  id: MedievalCarpenterTableDetail
+  parent: MedievalBaseMachineDetail
+  name: деталь стола плотника
+  components:
+  - type: MachineBoard
+    prototype: MedievalCarpenterTable
+    stackRequirements: # Пока так
+      MatterBin: 1
+      Manipulator: 3
+      Glass: 1

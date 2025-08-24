@@ -1,0 +1,8 @@
+## Static
+
+- type: latheRecipePack
+  id: WoodMedieval
+  recipes:
+  - MaterialWoodPlank
+
+

@@ -1,0 +1,48 @@
+- type: stack
+  id: MedievalRawWood
+  name: древесина
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/log.rsi, state: log }
+  spawn: MedievalLog1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawStone
+  name: камень
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: stone }
+  spawn: MedievalStoneOre1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawCoal
+  name: уголь
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: coal }
+  spawn: MedievalCoalOre1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawIron
+  name: железо
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: iron }
+  spawn: MedievalIronOre1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawSilver
+  name: серебро
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: silver }
+  spawn: MedievalSilverOre1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawGold
+  name: золото
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: gold }
+  spawn: MedievalGoldOre1
+  maxCount: 1
+
+- type: stack
+  id: MedievalRawMithril
+  name: мифрил
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: mithril }
+  spawn: MedievalMithrilOre1
+  maxCount: 1

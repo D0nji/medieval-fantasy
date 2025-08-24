@@ -1,0 +1,9 @@
+- type: latheRecipePack
+  id: MedievalSawmillStatic
+  recipes:
+  - MedievalBoard
+
+- type: latheRecipePack
+  id: MedievalCarpenterTable
+  recipes:
+  - MedievalTestDetail

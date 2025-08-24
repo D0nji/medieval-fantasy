@@ -1,0 +1,11 @@
+- type: Tag
+  id: MedievalOre
+
+- type: Tag
+  id: MedievalRawMaterial
+
+- type: Tag
+  id: MedievalSawmillMaterialStorage
+
+- type: Tag
+  id: CarpenterTableMaterialStorage
