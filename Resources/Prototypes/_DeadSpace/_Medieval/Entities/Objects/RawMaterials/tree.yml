@@ -51,7 +51,7 @@
             max: 3
 
 - type: entity
-  parent: BaseTreeMedieval
+  parent: MedievalBaseTree
   id: BaseTreeLargeMedieval
   abstract: true
   name: большое дерево
@@ -89,7 +89,7 @@
             max: 4
 
 - type: entity
-  parent: BaseTreeMedieval
+  parent: MedievalBaseTree
   id: FloraTreeMedieval
   name: дерево
   components:
