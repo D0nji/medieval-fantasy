@@ -1,8 +1,8 @@
 - type: Tag
-  id: MedievalOre
+  id: MedievalRawMaterial
 
 - type: Tag
-  id: MedievalRawMaterial
+  id: MedievalSmelterMaterialStorage
 
 - type: Tag
   id: MedievalSawmillMaterialStorage

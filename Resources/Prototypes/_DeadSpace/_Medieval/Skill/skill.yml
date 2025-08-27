@@ -5,3 +5,11 @@
   pointsNeeded: 100
   addLimit:
     craft: 1
+
+- type: skill
+  id: MedievalBasicBlacksmithing
+  name: основы кузнечного дела
+  description: Ремесло
+  pointsNeeded: 100
+  addLimit:
+    craft: 1

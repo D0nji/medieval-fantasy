@@ -7,3 +7,13 @@
   id: MedievalCarpenterTable
   recipes:
   - MedievalTestDetail
+
+- type: latheRecipePack
+  id: MedievalSmelter
+  recipes:
+  - MedievalIronIngot
+  - MedievalSteelIngot
+  - MedievalSilverIngot
+  - MedievalGoldIngot
+  - MedievalMithrilIngot
+  - MedievalAdamantineIngot

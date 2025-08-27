@@ -46,3 +46,10 @@
   icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: mithril }
   spawn: MedievalMithrilOre1
   maxCount: 1
+
+- type: stack
+  id: MedievalRawAdamantine
+  name: мифрил
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: adamantine }
+  spawn: MedievalAdamantineOre1
+  maxCount: 1

@@ -21,3 +21,15 @@
       MatterBin: 1
       Manipulator: 3
       Glass: 1
+
+- type: entity
+  id: MedievalSmelterDetail
+  parent: MedievalBaseMachineDetail
+  name: деталь плавильни
+  components:
+  - type: MachineBoard
+    prototype: MedievalSmelter
+    stackRequirements: # Пока так
+      MatterBin: 1
+      Manipulator: 3
+      Glass: 1

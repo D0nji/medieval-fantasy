@@ -79,6 +79,9 @@
   components:
   - type: Stack
     stackType: MedievalRawCoal
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
   - type: Sprite
     layers:
     - state: coal
@@ -114,13 +117,16 @@
   components:
   - type: Stack
     stackType: MedievalRawIron
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
   - type: Sprite
     layers:
     - state: iron
       map: ["random"]
   - type: PhysicalComposition
     materialComposition:
-      RawIron: 1000
+      MedievalRawIron: 1000
   - type: Item
     inhandVisuals:
       left:
@@ -149,6 +155,9 @@
   components:
   - type: Stack
     stackType: MedievalRawSilver
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
   - type: Sprite
     layers:
     - state: silver
@@ -184,6 +193,9 @@
   components:
   - type: Stack
     stackType: MedievalRawGold
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
   - type: Sprite
     layers:
     - state: gold
@@ -219,6 +231,9 @@
   components:
   - type: Stack
     stackType: MedievalRawMithril
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
   - type: Sprite
     layers:
     - state: mithril
@@ -236,6 +251,38 @@
 - type: entity
   id: MedievalMithrilOre1
   parent: MedievalMithrilOre
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalOreBase
+  id: MedievalAdamantineOre
+  categories: [ HideSpawnMenu ]
+  name: адамантитовая руда
+  components:
+  - type: Stack
+    stackType: MedievalRawAdamantine
+  - type: Tag
+    tags:
+    - MedievalSmelterMaterialStorage
+  - type: Sprite
+    layers:
+    - state: adamantine
+      map: ["random"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalRawAdamantine: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: adamantine-inhand-left
+      right:
+      - state: adamantine-inhand-right
+
+- type: entity
+  id: MedievalAdamantineOre1
+  parent: MedievalAdamantineOre
   components:
   - type: Stack
     count: 1

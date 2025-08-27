@@ -13,6 +13,13 @@
   categories:
   - MedievalWoodProcessing
 
+- type: latheRecipe
+  abstract: true
+  id: MedievalBaseSmelter
+  completetime: 10
+  categories:
+  - MedievalBlacksmithing
+
 ## Total Sawmill
 - type: latheRecipe
   parent: MedievalBaseSawmillRecipe
@@ -30,3 +37,58 @@
   completetime: 10
   materials:
     MedievalProcessedWood: 100
+
+## Total Smelter
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalIronIngot
+  result: MedievalIronIngot1
+  completetime: 10
+  materials:
+    MedievalRawIron: 100
+    MedievalRawCoal: 100
+
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalSteelIngot
+  result: MedievalSteelIngot1
+  completetime: 10
+  materials:
+    MedievalSteel: 100
+    MedievalRawCoal: 100
+
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalSilverIngot
+  result: MedievalSilverIngot1
+  completetime: 10
+  materials:
+    MedievalRawSilver: 100
+    MedievalRawCoal: 100
+
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalGoldIngot
+  result: MedievalGoldIngot1
+  completetime: 10
+  materials:
+    MedievalRawGold: 100
+    MedievalRawCoal: 100
+
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalMithrilIngot
+  result: MedievalMithrilIngot1
+  completetime: 10
+  materials:
+    MedievalRawMithril: 100
+    MedievalRawCoal: 100
+
+- type: latheRecipe
+  parent: MedievalBaseSmelter
+  id: MedievalAdamantineIngot
+  result: MedievalAdamantineIngot1
+  completetime: 10
+  materials:
+    MedievalRawAdamantine: 100
+    MedievalRawCoal: 100

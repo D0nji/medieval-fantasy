@@ -11,9 +11,6 @@
     sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi
     size: Normal
   - type: Material
-  - type: Tag
-    tags:
-    - MedievalOre
   - type: Fixtures
     fixtures:
       fix1:

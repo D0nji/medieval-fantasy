@@ -5,3 +5,66 @@
   color: "#8B4513"
   icon: { sprite:  _DeadSpace/_Medieval/Objects/Materials/board.rsi, state: board }
   price: 0
+
+- type: material
+  id: MedievalProcessedIron
+  stackEntity: MedievalIronIngot1
+  name: medieval-processed-materials-iron
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: iron }
+  color: "#C0C0C0"   # серебристо-серый, железо
+  price: 0
+
+- type: material
+  id: MedievalSteel
+  stackEntity: MedievalSteelIngot1
+  name: medieval-materials-steel
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: steel }
+  color: "#C0C0C0"   # серебристо-серый, железо
+  price: 0
+
+- type: material
+  id: MedievalProcessedSilver
+  stackEntity: MedievalSilverIngot1
+  name: medieval-processed-materials-silver
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: silver }
+  color: "#C0C0FF"   # светло-серебристо-голубой, серебро
+  price: 0
+
+- type: material
+  id: MedievalProcessedGold
+  stackEntity: MedievalGoldIngot1
+  name: medieval-processed-materials-gold
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: gold }
+  color: "#FFD700"   # золотой, золото
+  price: 0
+
+- type: material
+  id: MedievalProcessedMithril
+  stackEntity: MedievalMithrilIngot1
+  name: medieval-processed-materials-mithril
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: mithril }
+  color: "#9370DB"   # средний фиолетовый (medium purple)
+  price: 0
+
+- type: material
+  id: MedievalProcessedAdamantine
+  stackEntity: MedievalAdamantineIngot1
+  name: medieval-processed-materials-adamantine
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ingot.rsi, state: adamantine }
+  color: "#4B0000"
+  price: 0
+
+- type: material
+  id: MedievalProcessedStone
+  stackEntity: MedievalProcessedStone1
+  name: medieval-processed-materials-stone
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/stone.rsi, state: stone }
+  color: "#808080"   # серый, камень
+  price: 0

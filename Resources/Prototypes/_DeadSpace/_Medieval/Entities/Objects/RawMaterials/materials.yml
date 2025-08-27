@@ -60,3 +60,11 @@
   color: "#9370DB"   # средний фиолетовый (medium purple)
   price: 0
 
+- type: material
+  id: MedievalRawAdamantine
+  stackEntity: MedievalAdamantineOre1
+  name: medieval-raw-materials-adamantine
+  unit: materials-unit-chunk
+  icon: { sprite: /Textures/_DeadSpace/_Medieval/Objects/Materials/ore.rsi, state: adamantine }
+  color: "#4B0000"
+  price: 0

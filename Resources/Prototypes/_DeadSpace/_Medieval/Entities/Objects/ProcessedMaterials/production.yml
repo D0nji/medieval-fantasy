@@ -4,7 +4,6 @@
   categories: [ HideSpawnMenu ]
   name: доска
   components:
-  - type: Material
   - type: Stack
     stackType: MedievalBoard
     baseLayer: base
@@ -14,9 +13,9 @@
     - board_3
     - board_4
   - type: Sprite
-    state: board_4
+    state: board
     layers:
-    - state: board_4
+    - state: board
       map: ["base"]
   - type: Item
     heldPrefix: board
@@ -36,20 +35,237 @@
   id: MedievalBoard1
   name: доска
   components:
-  - type: Sprite
-    state: board
   - type: Stack
-    stackType: MedievalBoard
     count: 1
 
 - type: entity
   parent: MedievalBoard
-  id: SheetSteel5
+  id: MedievalBoard5
   name: доска
   suffix: Средневековье, 5
   components:
-  - type: Sprite
-    state: board
   - type: Stack
-    stackType: MedievalBoard
+    count: 5
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalIronIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток железа
+  components:
+  - type: Stack
+    stackType: MedievalProcessedIron
+  - type: Sprite
+    layers:
+    - state: iron
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedIron: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: iron-inhand-left
+      right:
+      - state: iron-inhand-right
+
+- type: entity
+  id: MedievalIronIngot1
+  parent: MedievalIronIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalSteelIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток стали
+  components:
+  - type: Stack
+    stackType: MedievalSteel
+  - type: Sprite
+    layers:
+    - state: steel
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalSteel: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: steel-inhand-left
+      right:
+      - state: steel-inhand-right
+
+- type: entity
+  id: MedievalSteelIngot1
+  parent: MedievalSteelIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalSilverIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток серебра
+  components:
+  - type: Stack
+    stackType: MedievalProcessedSilver
+  - type: Sprite
+    layers:
+    - state: silver
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedSilver: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: silver-inhand-left
+      right:
+      - state: silver-inhand-right
+
+- type: entity
+  id: MedievalSilverIngot1
+  parent: MedievalSilverIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalGoldIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток золота
+  components:
+  - type: Stack
+    stackType: MedievalProcessedGold
+  - type: Sprite
+    layers:
+    - state: gold
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedGold: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: gold-inhand-left
+      right:
+      - state: gold-inhand-right
+
+- type: entity
+  id: MedievalGoldIngot1
+  parent: MedievalGoldIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalMithrilIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток мифрила
+  components:
+  - type: Stack
+    stackType: MedievalProcessedMithril
+  - type: Sprite
+    layers:
+    - state: mithril
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedMithril: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: mithril-inhand-left
+      right:
+      - state: mithril-inhand-right
+
+- type: entity
+  id: MedievalMithrilIngot1
+  parent: MedievalMithrilIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalIngotBase
+  id: MedievalAdamantineIngot
+  categories: [ HideSpawnMenu ]
+  name: слиток адамантина
+  components:
+  - type: Stack
+    stackType: MedievalProcessedAdamantine
+  - type: Sprite
+    layers:
+    - state: adamantine
+      map: ["base"]
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedAdamantine: 1000
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: adamantine-inhand-left
+      right:
+      - state: adamantine-inhand-right
+
+- type: entity
+  id: MedievalAdamantineIngot1
+  parent: MedievalAdamantineIngot
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MedievalBaseProcessedMaterial
+  id: MedievalProcessedStone
+  categories: [ HideSpawnMenu ]
+  name: кирпич из камня
+  components:
+  - type: Appearance
+  - type: Stack
+    stackType: MedievalProcessedStone
+    baseLayer: base
+    layerStates:
+    - stone
+    - stone_2
+    - stone_3
+    - stone_4
+  - type: Sprite
+    sprite: _DeadSpace/_Medieval/Objects/Materials/stone.rsi
+    state: stone
+    layers:
+    - state: stone
+      map: ["base"]
+  - type: Item
+    heldPrefix: stone
+    sprite: _DeadSpace/_Medieval/Objects/Materials/stone.rsi
+    size: Normal
+    inhandVisuals:
+      left:
+      - state: stone-inhand-left
+      right:
+      - state: stone-inhand-right
+  - type: PhysicalComposition
+    materialComposition:
+      MedievalProcessedStone: 1000
+
+- type: entity
+  id: MedievalProcessedStone1
+  parent: MedievalProcessedStone
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: MedievalProcessedStone4
+  parent: MedievalProcessedStone
+  suffix: Средневековье, 4
+  components:
+  - type: Stack
     count: 5

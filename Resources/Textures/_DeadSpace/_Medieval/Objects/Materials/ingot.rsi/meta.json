@@ -10,68 +10,27 @@
 	{
       "name": "adamantine"
     },
-    {
-      "name": "coal"
-    },
-    {
-      "name": "coal2"
-    },
-    {
-      "name": "coal3"
-    },
 	{
       "name": "iron"
     },
     {
-      "name": "iron2"
-    },
-    {
-      "name": "iron3"
-    },
-	{
-      "name": "stone"
-    },
-    {
-      "name": "stone2"
-    },
-    {
-      "name": "stone3"
+      "name": "steel"
     },
 	{
       "name": "silver"
     },
-    {
-      "name": "silver2"
-    },
-    {
-      "name": "silver3"
-    },
 	{
       "name": "gold"
-    },
-    {
-      "name": "gold2"
-    },
-    {
-      "name": "gold3"
     },
 	{
       "name": "mithril"
     },
 	{
-      "name": "stone-inhand-left",
+      "name": "adamantine-inhand-left",
       "directions": 4
     },
     {
-      "name": "stone-inhand-right",
-      "directions": 4
-    },
-	{
-      "name": "coal-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "coal-inhand-right",
+      "name": "adamantine-inhand-right",
       "directions": 4
     },
 	{
@@ -80,6 +39,14 @@
     },
     {
       "name": "iron-inhand-right",
+      "directions": 4
+    },
+	{
+      "name": "steel-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "steel-inhand-right",
       "directions": 4
     },
 	{
